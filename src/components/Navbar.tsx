@@ -5,9 +5,9 @@ import DashboardBtn from './ui/DashboardBtn'
 const Navbar = () => {
   return (
     <div>
-        <nav className='border-red-500  border p-5 flex items-center justify-between px-8'>
+        <nav className='border-red-500  border p-5 flex items-center justify-between px-8 lg:px-12'>
             <div>
-                <h2 className='text-white text-2xl lg:text-4xl font-bold'>CoinX</h2>
+                <h2 className='text-white text-2xl lg:text-4xl font-bold'>Coin<span className='text-themeColor'>X</span></h2>
             </div>
             <div className='items-center hidden md:flex'>
                 <ul className='text-white flex items-center gap-10'>
