@@ -1,10 +1,13 @@
 import React from 'react'
+import Navbar from '../components/Navbar'
+import LabTabs from '../components/tabs'
 
 const DashboardPage = () => {
   return (
-    <div>
-      <h1 className='text-white'>Dashboard page</h1>
-    </div>
+    <>
+      <Navbar/>
+       <LabTabs/>
+    </>
   )
 }
 

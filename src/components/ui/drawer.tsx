@@ -6,6 +6,7 @@ import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import CompareArrowsRoundedIcon from '@mui/icons-material/CompareArrowsRounded';
 import GradeRoundedIcon from '@mui/icons-material/GradeRounded';
 import GridViewRoundedIcon from '@mui/icons-material/GridViewRounded';
+import { Link } from 'react-router-dom';
 
 
 export default function TemporaryDrawer() {
@@ -21,10 +22,10 @@ export default function TemporaryDrawer() {
       <IconButton onClick={toggleDrawer(true)}><MenuRoundedIcon className='dark:text-white'></MenuRoundedIcon></IconButton>
       <Drawer open={open} onClose={toggleDrawer(false)} anchor='right'>
             <ul className='dark:text-white text-black bg-black w-full h-full flex-col p-10 py-16 text-lg flex gap-5'>
-                <li><a className='flex items-center gap-3' href="/"><HomeRoundedIcon /> Home</a></li>
-                <li><a className='flex items-center gap-3' href="/"><CompareArrowsRoundedIcon/>Compare</a></li>
-                <li><a className='flex items-center gap-3' href="/"><GradeRoundedIcon/>Saved</a></li>
-                <li><a className='flex items-center gap-3' href="/"><GridViewRoundedIcon/>Dashboard</a></li>
+                <li><Link className='flex items-center gap-3' to="/"><HomeRoundedIcon /> Home</Link></li>
+                <li><Link className='flex items-center gap-3' to="/compare"><CompareArrowsRoundedIcon/>Compare</Link></li>
+                <li><Link className='flex items-center gap-3' to="/saved"><GradeRoundedIcon/>Saved</Link></li>
+                <li><Link className='flex items-center gap-3' to="/dashboard"><GridViewRoundedIcon/>Dashboard</Link></li>
             </ul>
       </Drawer>
     </div>

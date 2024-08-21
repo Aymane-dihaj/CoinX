@@ -1,20 +1,21 @@
 import React from 'react'
 import TemporaryDrawer from './ui/drawer'
 import DashboardBtn from './ui/DashboardBtn'
+import { Link } from 'react-router-dom'
 
 const Navbar = () => {
   return (
     <div>
-        <nav className='border-red-500  border p-5 flex items-center justify-between px-8 lg:px-12'>
+        <nav className=' p-5 flex items-center justify-between px-8 lg:px-12'>
             <div>
-                <h2 className='text-white text-2xl lg:text-4xl font-bold'>Coin<span className='text-themeColor'>X</span></h2>
+                <Link to='/'><h2 className='text-white text-2xl lg:text-4xl font-bold'>Coin<span className='text-themeColor'>X</span></h2></Link>
             </div>
             <div className='items-center hidden md:flex'>
                 <ul className='text-white flex items-center gap-10'>
-                    <li><a className='hover:text-gray-200' href="/">Home</a></li>
-                    <li><a className='hover:text-gray-200' href="/">Compare</a></li>
-                    <li><a className='hover:text-gray-200' href="/">Saved</a></li>
-                    <li><a className='hover:text-gray-200' href="/"><DashboardBtn/></a></li>
+                    <li><Link className='hover:text-gray-200' to="/">Home</Link></li>
+                    <li><Link className='hover:text-gray-200' to="/compare">Compare</Link></li>
+                    <li><Link className='hover:text-gray-200' to="/saved">Saved</Link></li>
+                    <li><Link className='hover:text-gray-200' to="/dashboard"><DashboardBtn/></Link></li>
                 </ul>
             </div>
             <TemporaryDrawer/>
