@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navbar from '../components/Navbar'
 import LabTabs from '../components/tabs'
 
-const DashboardPage = () => {
+const Dashboard = () => {
+
+  useEffect(() => {
+    
+  }, [])
+
   return (
     <>
       <Navbar/>
@@ -11,4 +16,4 @@ const DashboardPage = () => {
   )
 }
 
-export default DashboardPage
+export default Dashboard
