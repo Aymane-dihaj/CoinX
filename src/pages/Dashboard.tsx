@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import LabTabs from '../components/ui/tabs'
+import SearchBar from '../components/SearchBar'
 
 const Dashboard = () => {
 
   const [coins, setCoins] = useState([])
+  const [search, setSearch] = useState('');
+
+  const onSearchChange = (e) => {
+    console.log(e.target.value)
+    setSearch(e.target.value);
+  }
 
   useEffect(() => {
     const options = {
@@ -21,12 +28,13 @@ const Dashboard = () => {
       .catch(err => console.error(err));
   }, [])
 
-  console.log(coins);
+  let Filtredcoins = coins.filter((item) => item.name.toLowerCase().includes(search.toLowerCase()) || item.symbol.toLowerCase().includes(search.toLowerCase()))
 
   return (
     <>
       <Navbar/>
-       <LabTabs coins={coins} />
+      <SearchBar search={search} onSearchChange={onSearchChange}/>
+      <LabTabs coins={Filtredcoins} />
     </>
   )
 }

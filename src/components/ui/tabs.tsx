@@ -66,7 +66,7 @@ export default function LabTabs({ coins }: LabTabsProps) {
         </div>
       </TabPanel>
       <TabPanel value="list" style={{ color: 'white' }}>
-        <table className='w-[100%] lg:w-[90%] ml-auto mr-auto block border'>
+        <table className='w-[100%] p-2 border lg:px-20 ml-auto mr-auto block '>
           {coins.map((coin, idx) => (
             <List coin={coin} key={idx}/>
           ))}  

@@ -6,7 +6,7 @@ import './index.css'
 
 function App() {
   return (
-    <div className='font-sora bg-black '>
+    <div className='font-sora bg-black text-white'>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home/>}/>
