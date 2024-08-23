@@ -7,7 +7,7 @@ import { Tooltip } from '@mui/material';
 
 const List = ({coin} : any) => {
   return (
-    <tr className='flex items-center justify-between  w-full border  p-4 mt-7 hover:bg-white/[0.1] hover:rounded-lg transition-all ease-in-out '>
+    <tr className='flex items-center justify-between  w-full  p-4 mt-7 hover:bg-white/[0.1] hover:rounded-lg transition-all ease-in-out '>
         <Tooltip title='Name'>
           <td className=' w-[17%]  text-left  flex items-center'>
               <div className='flex lg:gap-10 gap-2 items-center '>
