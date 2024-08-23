@@ -5,6 +5,7 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import Coin from '../Coin';
+import List from '../List';
 
 interface Coin {
   id: string;
@@ -58,13 +59,19 @@ export default function LabTabs({ coins }: LabTabsProps) {
         />
       </TabList>
       <TabPanel value="grid" style={{ color: 'white' }}>
-        <div className='flex justify-center gap-[1rem] border m-[1.5rem] flex-wrap p-2 items-center'>
+        <div className='flex justify-center gap-[1.5rem]  m-[1.5rem] flex-wrap p-2 items-center'>
           {coins.map((coin, idx) => (
             <Coin coin={coin} key={idx}/>
             ))}  
         </div>
       </TabPanel>
-      <TabPanel value="list" style={{ color: 'white' }}>List</TabPanel>
+      <TabPanel value="list" style={{ color: 'white' }}>
+        <table className='w-[100%] lg:w-[90%] ml-auto mr-auto block border'>
+          {coins.map((coin, idx) => (
+            <List coin={coin} key={idx}/>
+          ))}  
+        </table>
+      </TabPanel>
     </TabContext>
   );
 }

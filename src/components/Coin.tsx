@@ -21,8 +21,8 @@ const Coin = ({coin} : any) => {
               <StarBorderRoundedIcon />
             </div>
         </div>
-        <div className='mt-6 flex items-center justify-start gap-2 pl-1'>
-          <p className={`p-1 ${coin.price_change_percentage_24h > 0 ? 'border-green-500 text-green-500' : 'border-red-500 text-red-500'} px-3 text-center border w-fit rounded-[30px] text-sm`}>{coin.price_change_percentage_24h.toFixed(3)}%</p>
+        <div className='mt-6 flex items-center justify-start gap-3 pl-1'>
+          <p className={`p-1 min-w-[100px] ${coin.price_change_percentage_24h > 0 ? 'border-green-500 text-green-500' : 'border-red-500 text-red-500'} px-3 text-center border w-fit rounded-[30px] text-sm`}>{coin.price_change_percentage_24h.toFixed(3)}%</p>
           <div className={`p-[2px] border ${coin.price_change_percentage_24h > 0 ? 'border-green-500' : 'border-red-500'} rounded-full items-center flex justify-center`}> {
               coin.price_change_percentage_24h > 0 ?  <TrendingUpRoundedIcon className='text-green-500 '/> : <TrendingDownRoundedIcon className='text-red-500'/>}
           </div>

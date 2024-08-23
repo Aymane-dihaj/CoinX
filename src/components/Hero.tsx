@@ -1,6 +1,7 @@
 import React from 'react'
 import DashboardBtn from './ui/DashboardBtn'
 import {motion} from 'framer-motion'
+import { Link } from 'react-router-dom'
 
 const Hero = () => {
   return (
@@ -9,7 +10,7 @@ const Hero = () => {
           <h1 className='text-white text-5xl text-center lg:text-start md:text-6xl lg:text-8xl max-w-4xl md:max-w-4xl lg:max-w-3xl font-semibold '>Real-Time Crypto <span className='text-themeColor'>Insights</span></h1>
           <p className='text-[#888] md:my-4 text-xs text-center md:text-start leading-2xl md:text-lg tracking-wide w-full'>Stay ahead with live crypto price tracking and instant market updates.</p>
           <div className='mt-2 w-full flex items-center  lg:justify-start justify-center'>
-            <DashboardBtn/>
+            <Link to='/dashboard'><DashboardBtn/></Link>
           </div>
       </div>
 
