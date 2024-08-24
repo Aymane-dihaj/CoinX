@@ -12,10 +12,10 @@ const Navbar = () => {
             </div>
             <div className='items-center hidden md:flex'>
                 <ul className='text-white flex items-center gap-10'>
-                    <li><Link className='hover:text-gray-200' to="/">Home</Link></li>
-                    <li><Link className='hover:text-gray-200' to="/compare">Compare</Link></li>
-                    <li><Link className='hover:text-gray-200' to="/saved">Saved</Link></li>
-                    <li><Link className='hover:text-gray-200' to="/dashboard"><DashboardBtn/></Link></li>
+                    <li className='cursor-pointer'><Link className=' hover:text-gray-200' to="/">Home</Link></li>
+                    <li className='cursor-pointer'><Link className=' hover:text-gray-200' to="/compare">Compare</Link></li>
+                    <li className='cursor-pointer'><Link className=' hover:text-gray-200' to="/saved">Saved</Link></li>
+                    <li className='cursor-pointer'><Link className=' hover:text-gray-200' to="/dashboard"><DashboardBtn/></Link></li>
                 </ul>
             </div>
             <TemporaryDrawer/>

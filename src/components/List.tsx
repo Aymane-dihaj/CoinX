@@ -7,7 +7,7 @@ import { Tooltip } from '@mui/material';
 
 const List = ({coin} : any) => {
   return (
-    <tr className='flex items-center justify-between  w-full  p-4 mt-7 hover:bg-white/[0.1] hover:rounded-lg transition-all ease-in-out '>
+    <tr className='flex items-center justify-between  w-full  p-4  hover:bg-white/[0.1] hover:rounded-lg transition-all ease-in-out '>
         <Tooltip title='Name'>
           <td className=' w-[17%]  text-left  flex items-center'>
               <div className='flex lg:gap-10 gap-2 items-center '>
@@ -21,7 +21,7 @@ const List = ({coin} : any) => {
         </Tooltip>
         <Tooltip title="Price Change Percentage In 24h">
           <td className='w-[17%]  text-left  flex items-center justify-start text-left  lg:gap-3'>
-            <p className={`p-1 min-w-[90px] ${coin.price_change_percentage_24h > 0 ? 'border-green-500 text-green-500' : 'border-red-500 text-red-500'} px-3 text-center border w-fit rounded-[30px] md:text-sm text-xs`}>{coin.price_change_percentage_24h.toFixed(3)}%</p> 
+            <p className={`p-1 min-w-[80px] ${coin.price_change_percentage_24h > 0 ? 'border-green-500 text-green-500' : 'border-red-500 text-red-500'} px-3 text-center border w-fit rounded-[30px] md:text-sm text-xs`}>{coin.price_change_percentage_24h.toFixed(3)}%</p> 
             <div className={`p-[2px] hidden md:flex border  ${coin.price_change_percentage_24h > 0 ? 'border-green-500' : 'border-red-500'} rounded-full items-center flex justify-center`}> {
               coin.price_change_percentage_24h > 0 ?  <TrendingUpRoundedIcon className='text-green-500 '/> : <TrendingDownRoundedIcon className='text-red-500'/>}
             </div>

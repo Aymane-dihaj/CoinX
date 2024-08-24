@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Home from "./pages/Home"
 import Dashboard from "./pages/Dashboard"
 import './index.css'
+import CoinPage from "./components/CoinPage"
 
 
 function App() {
@@ -11,9 +12,9 @@ function App() {
           <Routes>
             <Route path="/" element={<Home/>}/>
             <Route path="/dashboard" element={<Dashboard/>}/>
-            {/* <Route path="/compair" element={<ComparePage/>}/>
-            <Route path="/watchlist" element={<WatchListPage/>}/>
-            <Route path="/coin/:id" element={<CoinPage/>}/> */}
+            <Route path="/coin/:id" element={<CoinPage/>}/>
+            {/* <Route path="/watchlist" element={<WatchListPage/>}/>
+            <Route path="/compair" element={<ComparePage/>}/> */}
           </Routes>
         </BrowserRouter>
     </div>

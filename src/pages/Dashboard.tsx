@@ -15,8 +15,8 @@ const Dashboard = () => {
   const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
     console.log(value);
-    let previousIndex = (value - 1) * 13;
-    setPaginationCoins(coins.slice(previousIndex, previousIndex + 13));
+    let previousIndex = (value - 1) * 10;
+    setPaginationCoins(coins.slice(previousIndex, previousIndex + 10));
   };
 
   const onSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,25 +36,25 @@ const Dashboard = () => {
       .then(response => response.json())
       .then((response) => {
           setCoins(response)
-          setPaginationCoins(response.slice(0, 13));
+          setPaginationCoins(response.slice(0, 10));
           setLoading(false);
         })
       .catch(err => console.error(err));
   }, []);
 
   let Filtredcoins = coins.filter(
-    (item) => item.name.toLowerCase().includes(search.toLowerCase()) || item.symbol.toLowerCase().includes(search.toLowerCase())
+    (item: any) => item.name.toLowerCase().includes(search.toLowerCase()) || item.symbol.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
     <>
       <Navbar />
       {loading ? <Loader/> :
-        <>
-        <SearchBar search={search} onSearchChange={onSearchChange} />
+        <div className='mt-16'>
+        <SearchBar  search={search} onSearchChange={onSearchChange} />
         <LabTabs coins={search ? Filtredcoins : PaginationCoins} />
         {!search && <PaginationControlled page={page} handlePageChange={handlePageChange} />}
-      </>}
+      </div>}
     </>
   );
 };
