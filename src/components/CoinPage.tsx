@@ -25,20 +25,23 @@ const CoinPage = () => {
             .then((response) => {
                 CoinDataSetter(setCoinData, response)
                 setLoading(false);
+                console.log(id)
               })
             .catch(err => console.error(err));
     }, [id])
 
     return (
-        <div className="w-[100vw] border">
+        <>
             <Navbar/>
             {
-                loading ? <Loader/> : 
-                <div className="bg-white/[0.1] rounded-lg flex items-center justify-center w-full">
-                    <List coin={coinData}/>
-                </div>
+                loading ? <Loader/> :
+                <table className="w-full flex items-center mt-16 md:mt-28 justify-center ">
+                    <tbody className=" bg-white/[0.1] rounded-lg flex items-center justify-center w-[90%]">
+                        <List coin={coinData}/>
+                    </tbody>
+                </table> 
             }
-        </div>
+        </>
     )
 
 }

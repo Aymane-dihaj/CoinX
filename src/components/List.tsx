@@ -10,7 +10,7 @@ const List = ({coin} : any) => {
     <tr className='flex items-center justify-between  w-full  p-4  hover:bg-white/[0.1] hover:rounded-lg transition-all ease-in-out '>
         <Tooltip title='Name'>
           <td className=' w-[17%]  text-left  flex items-center'>
-              <div className='flex lg:gap-10 gap-2 items-center '>
+              <div className='flex lg:gap-10 gap-3 items-center '>
                 <img src={coin.image} className='object-cover lg:w-[50px] w-[30px]' alt="coin image" />
                 <div className='flex flex-col gap-1'>
                   <p className='uppercase md:font-semibold text-xs lg:text-lg'>{coin.symbol}</p>

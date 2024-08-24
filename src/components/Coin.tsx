@@ -7,8 +7,7 @@ import TrendingUpRoundedIcon from '@mui/icons-material/TrendingUpRounded';
 
 const Coin = ({coin} : any) => {
   return (
-<div
-  className={`w-[350px] h-[310px] bg-[#1a1a1a] rounded-xl px-4 py-8 hover:outline ${coin.price_change_percentage_24h > 0 ? 'hover:outline-green-500': 'hover:outline-red-500'} transition-all ease-in-out duration-50`} style={{ outlineWidth: '1.5px' }}>
+<div className={`w-[350px] h-[310px] bg-[#1a1a1a] rounded-xl px-6 py-8 hover:outline ${coin.price_change_percentage_24h > 0 ? 'hover:outline-green-500': 'hover:outline-red-500'} transition-all ease-in-out duration-50`} style={{ outlineWidth: '1.5px' }}>
         <div className='flex justify-between items-center'>
             <div className='flex gap-2 items-center '>
               <img src={coin.image} className='object-cover w-[50px]' alt="coin image" />
