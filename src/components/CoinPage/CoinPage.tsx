@@ -40,8 +40,8 @@ const CoinPage = () => {
             {
                 loading ? <Loader/> :
                 <div>
-                    <table className="w-full flex items-center mt-16 md:mt-28 justify-center ">
-                        <tbody className=" bg-white/[0.1] rounded-lg px-10 flex items-center justify-center w-[80%]">
+                    <table className="w-full flex items-center mt-16 md:mt-28 justify-center  px-12 lg:px-32 ">
+                        <tbody className=" rounded-lg px-2 flex items-center justify-center w-full bg-white/[0.1]">
                             <List coin={coinData}/>
                         </tbody>
                     </table> 
