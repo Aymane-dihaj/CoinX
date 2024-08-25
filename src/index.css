@@ -23,3 +23,9 @@ img {
     -moz-user-drag: none;
     -o-user-drag: none;
   }
+
+
+.desc > a{
+    text-decoration: underline;
+
+}

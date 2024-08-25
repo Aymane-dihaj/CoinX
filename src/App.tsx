@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Home from "./pages/Home"
 import Dashboard from "./pages/Dashboard"
 import './index.css'
-import CoinPage from "./components/CoinPage"
+import CoinPage from "./components/CoinPage/CoinPage"
 
 
 function App() {
