@@ -8,6 +8,8 @@ import CoinInfo from "./CoinInfo";
 import { getCoinData } from "../../utils/getCoinData";
 import { getCoinPrices } from "../../utils/getCoinPrices";
 import CoinChart from "./CoinChart";
+import { convertDate } from "../../utils/convertDate";
+
 
 const CoinPage = () => {
 
@@ -17,6 +19,7 @@ const CoinPage = () => {
     const [coinData, setCoinData] = useState({
         name: '',
         desc: '',
+        price_change_percentage_24h: 0, 
     });
 
     useEffect(() => {
@@ -29,20 +32,24 @@ const CoinPage = () => {
         const data = await getCoinData(id);
         if (data){
             CoinDataSetter(setCoinData, data);
-            const coinPrices = await getCoinPrices(id, 7);
+            const coinPrices = await getCoinPrices(id, 2);
             if (coinPrices){
                 setCoinChart({
-                    labels: ["mon", "tue", "wed", "thur"],
+                    labels: coinPrices.map((price: Array<number>) => convertDate(price[0])),
                     datasets: [
                     {
                         label: 'bitcoin',
-                      data: [65, 59, 80, 81, 56, 55, 40],
+                      data: coinPrices.map((price: Array<number>) => (price[1])),
                       fill: true,
-                      borderColor: 'rgb(75, 192, 192)',
-                      tension: 0.1
+                      borderColor: 'gold',
+                      backgroundColor: 'gold',
+                      tension: 0.25,
+                      borderWidth: 2,
+                      pointRadius: 3,
                     },
                     ]
                 })
+                console.log(coinData.price_change_percentage_24h)
                 setLoading(false);
                 // console.log(coinPrices);
             }
@@ -60,7 +67,7 @@ const CoinPage = () => {
                             <List coin={coinData}/>
                         </tbody>
                     </table>
-                    <div>
+                    <div className="mt-6 items-center justify-center flex  gap-10 w-full]">
                         <CoinChart chartData={coinChart}/>
                     </div>
                     <div>

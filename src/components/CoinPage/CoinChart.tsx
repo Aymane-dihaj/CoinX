@@ -28,13 +28,14 @@ function CoinChart({ chartData, multiAxis }: { chartData: any; multiAxis: any })
       },
     },
     responsive: true,
+    maintainAspectRatio: false,
     interaction: {
       mode: "index",
       intersect: false,
     },
   };
 
-  return <Line data={chartData} options={options} />;
+  return <div className="bg-white/[0.1] rounded-lg px-10 w-[80%] flex flex-col p-8 gap-8 justify-center"><Line data={chartData} options={options} /></div>;
 }
 
 export default CoinChart;
