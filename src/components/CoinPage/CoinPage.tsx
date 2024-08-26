@@ -10,6 +10,8 @@ import { getCoinPrices } from "../../utils/getCoinPrices";
 import CoinChart from "./CoinChart";
 import { convertDate } from "../../utils/convertDate";
 import BasicSelect from "../ui/SelectButton";
+import SelectButton from "../ui/SelectButton";
+import { setChartData } from "../../utils/setChartData";
 
 
 const CoinPage = () => {
@@ -17,10 +19,12 @@ const CoinPage = () => {
     const { id } = useParams()
     const [loading, setLoading] = useState(true);
     const [coinChart, setCoinChart] = useState({})
+    const [days, setDays] = useState<number>(7);
     const [coinData, setCoinData] = useState({
         name: '',
         desc: '',
-        price_change_percentage_24h: 0, 
+        price_change_percentage_24h: 0,
+        id: 0,
     });
 
     useEffect(() => {
@@ -33,27 +37,23 @@ const CoinPage = () => {
         const data = await getCoinData(id);
         if (data){
             CoinDataSetter(setCoinData, data);
-            const coinPrices = await getCoinPrices(id, 2);
+            const coinPrices = await getCoinPrices(id, days);
             if (coinPrices){
-                setCoinChart({
-                    labels: coinPrices.map((price: Array<number>) => convertDate(price[0])),
-                    datasets: [
-                    {
-                        label: 'bitcoin',
-                      data: coinPrices.map((price: Array<number>) => (price[1])),
-                      fill: true,
-                      borderColor: 'gold',
-                      backgroundColor: 'gold',
-                      tension: 0.25,
-                      borderWidth: 2,
-                      pointRadius: 0,
-                    },
-                    ]
-                })
-                console.log(coinData.price_change_percentage_24h)
+                setChartData(setCoinChart, coinPrices);
                 setLoading(false);
                 // console.log(coinPrices);
             }
+        }
+    }
+    console.log("days: " + days);
+
+    const handleDaysChange = async (n: number) => {
+        setDays(n);
+        const prices = await getCoinPrices(id, n);
+        if (prices){
+            setChartData(setCoinChart, prices);
+            setLoading(false);
+            // console.log(coinPrices);
         }
     }
 
@@ -74,7 +74,7 @@ const CoinPage = () => {
                         </div> */}
                         <div className="bg-[#1a1a1a] rounded-lg p-5 items-start justify-center flex flex-col gap-10 w-full">
                             <div>
-                                <BasicSelect/>
+                                <SelectButton handleChange={handleDaysChange}/>
                             </div>
                             <CoinChart chartData={coinChart} multiAxis={false}/>
                         </div>

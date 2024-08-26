@@ -1,64 +1,25 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-
-export default function BasicSelect() {
-  const [age, setAge] = React.useState('');
-
-  const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value as string);
-  };
-
-  return (
-    <Box sx={{ minWidth: 130 }}>
-      <FormControl fullWidth>
-        <InputLabel id="days" sx={{ color: 'white' }}>Days</InputLabel>
-        <Select
-          labelId="days"
-          id="days"
-          value={age}
-          label="Days"
-          onChange={handleChange}
-          sx={{
-            height: "2.5rem",
-            display: 'flex',
-            alignItems: 'center',
-            color: "white",
-            textAlign: 'start',
-            borderColor: "white",
-
-            "& .MuiOutlinedInput-notchedOutline": {
-              borderColor: "white",
-              "&:focus-within": {
-                borderColor: "gold",
-              },
-            },
-            "& .MuiSvgIcon-root": {
-              color: "white",
-            },
-            "& .MuiSelect-select": {
-                "& #id": {
-                    border: '2px solid red',
-                },
-              color: "white", // Change the selected text color to white
-            },
-            "&:hover .MuiOutlinedInput-notchedOutline": {
-              borderColor: "white",
-            },
-            "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-              borderColor: "gold",
-            },
-          }}
-        >
-          <MenuItem value={7}>7</MenuItem>
-          <MenuItem value={30}>30</MenuItem>
-          <MenuItem value={60}>60</MenuItem>
-          <MenuItem value={365}>365</MenuItem>
-        </Select>
-      </FormControl>
-    </Box>
-  );
+interface SelectButtonProps {
+  handleChange: React.Dispatch<React.SetStateAction<number>>;
 }
+
+export const SelectButton: React.FC<SelectButtonProps> = ({ handleChange }) => {
+  return (
+    <div>
+      <form className="max-w-sm mx-auto">
+        <label htmlFor="days" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Days</label>
+        <select
+          id="days"
+          className="drop-menu bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-white/[0.2] dark:border-white/[0.1] dark:placeholder-gray-400 dark:text-white"
+          onChange={(e) => handleChange(Number(e.target.value))}
+        >
+          <option style={{ backgroundColor: '#1a1a1a' }} value="7">7 Days</option>
+          <option style={{ backgroundColor: '#1a1a1a' }} value="30">30 Days</option>
+          <option style={{ backgroundColor: '#1a1a1a' }} value="60">60 Days</option>
+          <option style={{ backgroundColor: '#1a1a1a' }} value="365">365 Days</option>
+        </select>
+      </form>
+    </div>
+  );
+};
+
+export default SelectButton;
