@@ -22,7 +22,7 @@ const List = ({coin} : any) => {
             </td>
           </Tooltip>
           <Tooltip title="Price Change Percentage In 24h">
-            <td className='w-[33%] md:w-[20%] flex items-center justify-center   lg:gap-3'>
+            <td className='w-[33%] md:w-[20%] flex items-center justify-center md:gap-3  lg:gap-3'>
               <p className={`p-1 min-w-[80px] ${coin.price_change_percentage_24h > 0 ? 'border-green-500 text-green-500' : 'border-red-500 text-red-500'} px-3 text-center border w-fit rounded-[30px] md:text-sm text-xs`}>{coin.price_change_percentage_24h.toFixed(3)}%</p> 
               <div className={`p-[2px] hidden md:flex border  ${coin.price_change_percentage_24h > 0 ? 'border-green-500' : 'border-red-500'} rounded-full items-center flex justify-center`}> {
                 coin.price_change_percentage_24h > 0 ?  <TrendingUpRoundedIcon className='text-green-500 '/> : <TrendingDownRoundedIcon className='text-red-500'/>}

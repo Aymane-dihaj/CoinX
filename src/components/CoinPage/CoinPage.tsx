@@ -9,6 +9,7 @@ import { getCoinData } from "../../utils/getCoinData";
 import { getCoinPrices } from "../../utils/getCoinPrices";
 import CoinChart from "./CoinChart";
 import { convertDate } from "../../utils/convertDate";
+import BasicSelect from "../ui/SelectButton";
 
 
 const CoinPage = () => {
@@ -45,7 +46,7 @@ const CoinPage = () => {
                       backgroundColor: 'gold',
                       tension: 0.25,
                       borderWidth: 2,
-                      pointRadius: 3,
+                      pointRadius: 0,
                     },
                     ]
                 })
@@ -61,14 +62,22 @@ const CoinPage = () => {
             <Navbar/>
             {
                 loading ? <Loader/> :
-                <div>
+                <div className="flex flex-col  gap-4 mb-10">
                     <table className="w-full flex items-center mt-16 md:mt-28 justify-center  ">
-                        <tbody className=" rounded-lg px-2 w-[80%] flex items-center justify-center  bg-white/[0.1]">
+                        <tbody className=" rounded-lg  w-[80%] flex items-center justify-center  bg-[#1a1a1a]">
                             <List coin={coinData}/>
                         </tbody>
                     </table>
-                    <div className="mt-6 items-center justify-center flex  gap-10 w-full]">
-                        <CoinChart chartData={coinChart}/>
+                    <div className="space-y-3 mt-6 lg:mt-10 w-[80%] ml-auto mr-auto">
+                        {/* <div className=" px-10 flex p-8 gap-8 justify-center ml-auto mr-auto w-[80%]   rounded-lg">
+                            <BasicSelect/>
+                        </div> */}
+                        <div className="bg-[#1a1a1a] rounded-lg p-5 items-start justify-center flex flex-col gap-10 w-full">
+                            <div>
+                                <BasicSelect/>
+                            </div>
+                            <CoinChart chartData={coinChart} multiAxis={false}/>
+                        </div>
                     </div>
                     <div>
                         {coinData && <CoinInfo title={coinData.name} description={coinData.desc}/>}
