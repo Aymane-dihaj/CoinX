@@ -1,6 +1,6 @@
 import { notify } from "../components/ui/toast";
 
-export const getCoinPrices = (id: string | undefined, days: number) => {
+export const getCoinPrices = (id: string | undefined, days: number, type: string) => {
 
     const options = {
         method: 'GET',
@@ -14,7 +14,7 @@ export const getCoinPrices = (id: string | undefined, days: number) => {
         const myData = fetch(`https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${days}`, options)
             .then(response => response.json())
             .then((response) => {
-                return response.prices;
+                return response[type];
             })
             return myData;
         } catch (err) {

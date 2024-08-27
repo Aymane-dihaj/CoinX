@@ -78,14 +78,16 @@ const Dashboard = () => {
       <Navbar />
       {loading ? <Loader /> :
         <div className='mt-16'>
-          <SearchBar search={search} onSearchChange={onSearchChange} />
+          <div>
+            <SearchBar search={search} onSearchChange={onSearchChange} />
+          </div>
           {noResults && search ? (
             <NoResult searchValue={search} setSearchValue={setSearch}/>
           ) : (
-            <>
+            <div>
               <LabTabs coins={search ? Filtredcoins : PaginationCoins} />
               {!search && <PaginationControlled page={page} handlePageChange={handlePageChange} />}
-            </>
+            </div>
           )}
           <Toaster/>
         </div>

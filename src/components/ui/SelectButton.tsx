@@ -1,6 +1,8 @@
+interface SelectButtonProps {
+  handleChange: React.Dispatch<React.SetStateAction<number>>;
+}
 
-
-export const SelectButton = (handleChange : any) => {
+export const SelectButton: React.FC<SelectButtonProps> = ({ handleChange }) => {
   return (
     <div>
       <form className="max-w-sm mx-auto">

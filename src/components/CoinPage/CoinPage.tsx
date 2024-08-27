@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "../Navbar";
 import Loader from "../ui/Loader";
-import { CoinDataSetter } from "../../data/CoinDataSetter";
+import { CoinDataSetter } from "../../utils/CoinDataSetter";
 import List from "../List";
 import CoinInfo from "./CoinInfo";
 import { getCoinData } from "../../utils/getCoinData";
@@ -14,6 +14,9 @@ import SelectButton from "../ui/SelectButton";
 import { setChartData } from "../../utils/setChartData";
 import { Toaster } from "react-hot-toast";
 import { notify } from "../ui/toast";
+import ToggleButtons from "../ui/toggleBar";
+import ToggleComponents from "../ui/toggleBar";
+import { SelectType } from "../ui/SelectType";
 
 interface coindata{
     id: number,
@@ -39,12 +42,28 @@ interface coindata{
     }
 }
 
+const filterUniqueDates = (prices: Array<[number, number]>) => {
+    const seenDates = new Set();
+    
+    return prices.filter(([timestamp, price]) => {
+      const date = new Date(timestamp).toLocaleDateString(); // Convert to date string
+      
+      if (seenDates.has(date)) {
+        return false; // Skip this entry if the date is already in the set
+      } else {
+        seenDates.add(date); // Add the date to the set and keep the entry
+        return true;
+      }
+    });
+  };
+
 const CoinPage = () => {
 
     const { id } = useParams()
     const [loading, setLoading] = useState(true);
     const [coinChart, setCoinChart] = useState({})
     const [days, setDays] = useState<number>(7);
+    const [type, setType] = useState<string>('prices')
     const [coinData, setCoinData] = useState<coindata>({
         id: 0,
         name: '',
@@ -79,12 +98,12 @@ const CoinPage = () => {
     const getData = async () => {
         const data = await getCoinData(id);
         if (data){
-            const priceChange24h = parseFloat(data.market_data.price_change_percentage_24h);
             console.log(data);
+            const priceChange24h = parseFloat(data.market_data.price_change_percentage_24h);
             CoinDataSetter(setCoinData, data);
-            const coinPrices = await getCoinPrices(id, days);
+            let coinPrices = await getCoinPrices(id, days, type);
             if (coinPrices && coinPrices.length > 0){
-                
+                coinPrices = filterUniqueDates(coinPrices);
                 setChartData(setCoinChart, coinPrices, data.name, (priceChange24h > 0 ? 'green' : 'red'));
                 setLoading(false);
                 // console.log(coinPrices);
@@ -94,12 +113,25 @@ const CoinPage = () => {
 
     const handleDaysChange = async (n: number) => {
         setDays(n);
-        const prices = await getCoinPrices(id, n);
+        let prices = await getCoinPrices(id, n, type);
         if (prices && prices.length > 0){
-            const priceChange24h = parseFloat(coinData.market_data.price_change_percentage_24h);
+            prices = filterUniqueDates(prices);
+            const priceChange24h = parseFloat(coinData.price_change_percentage_24h);
             setChartData(setCoinChart, prices, coinData.name, (priceChange24h < 0 ? 'red' : 'green'));
             setLoading(false);
             // console.log(coinPrices);
+        }
+    }
+
+    const handleTypeChange = async (priceType: string) => {
+        setType(priceType)
+        let newData = await getCoinPrices(id, days, priceType);
+        if (newData && newData.length > 0){
+            console.log(newData)
+            newData = filterUniqueDates(newData);
+            const priceChange24h = parseFloat(coinData.price_change_percentage_24h);
+            setChartData(setCoinChart, newData, coinData.name, (priceChange24h < 0 ? 'red' : 'green'));
+            setLoading(false)
         }
     }
 
@@ -119,8 +151,10 @@ const CoinPage = () => {
                             <BasicSelect/>
                         </div> */}
                         <div className="bg-[#1a1a1a] rounded-lg p-5 items-start justify-center flex flex-col gap-10 w-full">
-                            <div>
+                            <div className="flex items-center gap-5">
                                 <SelectButton handleChange={handleDaysChange}/>
+                                <SelectType handleChange={handleTypeChange}/>
+                                {/* <ToggleComponents/> */}
                             </div>
                             <div className="w-full flex flex-col lg:h-[600px]">
                                 <CoinChart chartData={coinChart} multiAxis={false}/>

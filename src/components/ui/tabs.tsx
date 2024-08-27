@@ -27,7 +27,7 @@ export default function LabTabs({ coins }: LabTabsProps) {
   };
 
   return (
-    <TabContext value={value}>
+    <TabContext value={value} >
       <TabList
         onChange={handleChange}
         variant='fullWidth'
@@ -58,15 +58,16 @@ export default function LabTabs({ coins }: LabTabsProps) {
           }}
         />
       </TabList>
-      <TabPanel value="grid" style={{ color: 'white' }}>
-        <div className='flex justify-center gap-[1.5rem]  m-[.5rem] flex-wrap p-2 items-center'>
+
+      <TabPanel value="grid" style={{ color: 'white'}}>
+        <div className='flex justify-center gap-[1.5rem] mt-6 m-[.5rem] flex-wrap p-2 items-center'>
           {coins.map((coin, idx) => (
             <Coin coin={coin} key={idx}/>
             ))}  
         </div>
       </TabPanel>
       <TabPanel value="list" style={{ color: 'white' }}>
-        <table className='w-[100%] mt-16 lg:w-[80%] lg:p-4 bg-white/[0.1] rounded-lg ml-auto mr-auto block '>
+        <table className='w-[100%] mt-16 lg:w-[90%] lg:p-4 bg-white/[0.1] rounded-lg ml-auto mr-auto block '>
           {coins.map((coin, idx) => (
             <List coin={coin} key={idx}/>
           ))}  
