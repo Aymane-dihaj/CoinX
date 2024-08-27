@@ -1,8 +1,8 @@
-interface SelectButtonProps {
+interface SelectDaysProps {
   handleChange: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export const SelectButton: React.FC<SelectButtonProps> = ({ handleChange }) => {
+export const SelectDays: React.FC<SelectDaysProps> = ({ handleChange }) => {
   return (
     <div>
       <form className="max-w-sm mx-auto">
@@ -22,4 +22,4 @@ export const SelectButton: React.FC<SelectButtonProps> = ({ handleChange }) => {
   );
 };
 
-export default SelectButton;
+export default SelectDays;

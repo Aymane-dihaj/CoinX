@@ -9,8 +9,7 @@ import { getCoinData } from "../../utils/getCoinData";
 import { getCoinPrices } from "../../utils/getCoinPrices";
 import CoinChart from "./CoinChart";
 import { convertDate } from "../../utils/convertDate";
-import BasicSelect from "../ui/SelectButton";
-import SelectButton from "../ui/SelectButton";
+import SelectDays from "../ui/SelectButton";
 import { setChartData } from "../../utils/setChartData";
 import { Toaster } from "react-hot-toast";
 import { notify } from "../ui/toast";
@@ -140,7 +139,7 @@ const CoinPage = () => {
             <Navbar/>
             {
                 loading ? <Loader/> :
-                <div className="flex flex-col  gap-4 mb-10">
+                <div className="flex flex-col  gap-4 mb-10 pt-16">
                     <table className="w-full flex items-center mt-16 md:mt-28 justify-center  ">
                         <tbody className=" rounded-lg w-[80%] flex items-center justify-center  bg-[#1a1a1a]">
                             <List coin={coinData}/>
@@ -152,7 +151,7 @@ const CoinPage = () => {
                         </div> */}
                         <div className="bg-[#1a1a1a] rounded-lg p-5 items-start justify-center flex flex-col gap-10 w-full">
                             <div className="flex items-center gap-5">
-                                <SelectButton handleChange={handleDaysChange}/>
+                                <SelectDays handleChange={handleDaysChange}/>
                                 <SelectType handleChange={handleTypeChange}/>
                                 {/* <ToggleComponents/> */}
                             </div>
