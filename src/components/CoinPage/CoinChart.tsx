@@ -1,5 +1,6 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
+import { Chart, Filler } from 'chart.js';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -9,6 +10,9 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+
+// Register the Filler plugin
+Chart.register(Filler);
 
 // Register required components
 ChartJS.register(
@@ -36,7 +40,7 @@ function CoinChart({ chartData, multiAxis }: { chartData: any; multiAxis: boolea
     },
   };
 
-  return <div className=" flex flex-col w-full justify-center"><Line data={chartData} options={options} /></div>;
+  return <Line data={chartData} options={options} />;
 }
 
 export default CoinChart;

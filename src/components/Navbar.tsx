@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 const Navbar = () => {
   return (
     <div>
-        <nav className=' p-5 flex items-center justify-between px-8 lg:px-12'>
+        <nav className=' p-5 flex items-center justify-between px-8 lg:px-12 z-40 sticky'>
             <div>
                 <Link to='/'><h2 className='text-white text-2xl lg:text-4xl font-bold'>Coin<span className='text-themeColor'>X</span></h2></Link>
             </div>

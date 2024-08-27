@@ -1,3 +1,5 @@
+import { notify } from "../components/ui/toast";
+
 export const getCoinPrices = (id: string | undefined, days: number) => {
 
     const options = {
@@ -8,13 +10,16 @@ export const getCoinPrices = (id: string | undefined, days: number) => {
         },
     };
 
-    const myData = fetch(`https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${days}`, options)
-        .then(response => response.json())
-        .then((response) => {
-            return response.prices;
-        
-        })
-        .catch(err => console.error(err));
+    try {
+        const myData = fetch(`https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${days}`, options)
+            .then(response => response.json())
+            .then((response) => {
+                return response.prices;
+            })
+            return myData;
+        } catch (err) {
+            const errorMessage = err instanceof Error ? err.message : 'An unknown error occurred';
+            notify(errorMessage); // Ensure notify can handle the error message type
+    }
 
-        return myData;
 }
