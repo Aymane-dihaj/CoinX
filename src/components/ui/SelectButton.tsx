@@ -2,7 +2,7 @@ interface SelectDaysProps {
   handleChange: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export const SelectDays: React.FC<SelectDaysProps> = ({ handleChange }) => {
+export const SelectDays: React.FC<SelectDaysProps> = ({ handleChange}) => {
   return (
     <div>
       <form className="max-w-sm mx-auto ">

@@ -25,7 +25,7 @@ ChartJS.register(
   Legend
 );
 
-function CoinChart({ chartData, multiAxis, priceType }: { chartData: any; multiAxis: boolean; priceType: string }) {
+function CoinChart({ chartData, multiAxis, name, name2}: { chartData: any; multiAxis: boolean; name?: string, name1?: string}) {
   const options = {
     plugins: {
       legend: {
@@ -40,18 +40,13 @@ function CoinChart({ chartData, multiAxis, priceType }: { chartData: any; multiA
       intersect: false,
     },
     scales: {
-      y: {
-        ticks: {
-          callback: function (value: number){
-            if (priceType === 'prices')
-              return "$" + value.toLocaleString();
-            else{
-              return convertPrice(value)
-            }
-          }
-        }
-      }
-    }
+      coin1: {
+        position: "left",
+      },
+      coin2: multiAxis && {
+        position: "right",
+      },
+    },
   };
 
   return <Line data={chartData} options={options} />;

@@ -11,6 +11,8 @@ import Loader from '../components/ui/Loader';
 import { Toaster } from 'react-hot-toast';
 import List from '../components/List';
 import { setChartData } from '../utils/setChartData';
+import { filterUniqueDates } from './CoinPage/CoinPage';
+import CoinChart from './CoinPage/CoinChart';
 
 const ComparePage = () => {
 
@@ -22,18 +24,20 @@ const ComparePage = () => {
   const [loading, setLoading] = useState(true);
   const [priceType, setPriceType] = useState('prices')
   const [chartPriceData, setChartPriceData] = useState();
+  const [allCoins, setAllCoins] = useState([]);
 
 
-  const handleDaysChange = async (n: number) => {
-    try {
-        setDays(n);
-    
-    }catch (error) {
-        console.error("Failed to fetch coin prices:", error);
-        notify("Failed to fetch coin Data. Please try again later.");
-    }
+  const handleDaysChange = async (e: number) => {
+    const newDays = e;
+    setLoading(true);
+    setDays(newDays);
+    let prices1 = await getCoinPrices(coin1, newDays, priceType);
+    let prices2 = await getCoinPrices(coin2, newDays, priceType);
+    prices1 = filterUniqueDates(prices1);
+    prices2 = filterUniqueDates(prices2);
+    setChartData(setChartPriceData, prices1, coin1Data.name, 'green', prices2, coin2Data.name);
+    setLoading(false);
   };
-
   
   useEffect(() => {
     getData();
@@ -41,59 +45,62 @@ const ComparePage = () => {
   
   const getData = async () => {
     setLoading(true);
-    const data1 = await getCoinData(coin1);
-    if (data1){
-      CoinDataSetter(setCoin1Data, data1);
+    const coins = await getAllCoins();
+    if (coins){
+      setAllCoins(coins);
+      const data1 = await getCoinData(coin1);
       const data2 = await getCoinData(coin2);
-      if (data2){
-        CoinDataSetter(setCoin2Data, data2);
-        const prices1 = await getCoinPrices(coin1, days, priceType);
-        const prices2 = await getCoinPrices(coin2, days, priceType);
-        if (prices1.length > 0 && prices2.length > 0){
-          setChartData(setChartPriceData, prices1, prices2);
-            // console.log('prices1 fetched: ' + prices1)
-            // console.log('prices2 fetched: ' + prices2)
-            setLoading(false); 
-        }
+      CoinDataSetter(setCoin1Data, data1);
+      CoinDataSetter(setCoin2Data, data2);
+      if (data1 && data2){
+        //Getting prices
+        let prices1 = await getCoinPrices(coin1, days, priceType)
+        let prices2 = await getCoinPrices(coin2, days, priceType);
+        prices1 = filterUniqueDates(prices1);
+        prices2 = filterUniqueDates(prices2);
+        setChartData(setChartPriceData, prices1, data1.name, 'green', prices2, data2.name);
+        setLoading(false); 
       }
     }
   }
   
   const handleCoinChange = async (e: any, whichCoin: boolean) => {
-    // setLoading(true);
+    setLoading(true);
     if (whichCoin){
-        setCoin2(e.target.value);
-        const data = await getCoinData(e.target.value);
-          if (data) {
-            CoinDataSetter(setCoin2Data, data);
-            const priceChange24h = parseFloat(data.market_data.price_change_percentage_24h);
-            // if (coinPrices && coinPrices.length > 0) {
-                // coinPrices = filterUniqueDates(coinPrices);
-                // setChartData(setCoinChart, coinPrices, data.name, priceChange24h > 0 ? 'green' : 'red');
-                setLoading(false);
-            }
-    }
-    else{
-      setCoin1(e.target.value);
-      const data = await getCoinData(e.target.value);
-      if (data) {
-        CoinDataSetter(setCoin2Data, data);
-          const priceChange24h = parseFloat(data.market_data.price_change_percentage_24h);
-          // if (coinPrices && coinPrices.length > 0) {
-              // coinPrices = filterUniqueDates(coinPrices);
-              // setChartData(setCoinChart, coinPrices, data.name, priceChange24h > 0 ? 'green' : 'red');
-              setLoading(false);
-          }
-      }
+      const newCoin2 = e.target.value;
+      setCoin2(newCoin2);
+      const data2 = await getCoinData(newCoin2);
+      CoinDataSetter(setCoin2Data, data2);
+      //Fetching prices again
       let coin1Prices = await getCoinPrices(coin1, days, priceType);
+      let coin2Prices = await getCoinPrices(newCoin2, days, priceType);
+      if (coin1Prices.length > 0 && coin2Prices.length > 0)
+      {
+        coin1Prices = filterUniqueDates(coin1Prices);
+        coin2Prices = filterUniqueDates(coin2Prices);
+        setChartData(setChartPriceData, coin1Prices, coin1Data.name, 'green', coin2Prices, data2.name);
+      }
+    }else {
+      const newCoin1 = e.target.value;
+      setCoin1(newCoin1);
+      // crypto1 is being changed
+      setCoin1Data(newCoin1);
+      // fetch coin1 data
+      const data1 = await getCoinData(newCoin1);
+      CoinDataSetter(setCoin1Data, data1);
+      // fetch coin prices
+      let coin1Prices = await getCoinPrices(newCoin1, days, priceType);
       let coin2Prices = await getCoinPrices(coin2, days, priceType);
-    // console.log(e.target.value)
-}
-  // console.log('coin1: ' + coin1)
-  // console.log('coin2: ' + coin2)
-  console.log(coin1Data);
-  console.log('-------------');
-  console.log(coin2Data);
+      if (coin1Prices.length > 0 && coin2Prices.length > 0)
+      {
+        coin1Prices = filterUniqueDates(coin1Prices);
+        coin2Prices = filterUniqueDates(coin2Prices);
+        setChartData(setChartPriceData, coin1Prices, coin1Data.name, 'green', coin2Prices, data1.name);
+      }
+    }
+    setLoading(false)
+  }
+
 
   return (
     <div className='pt-32'>
@@ -119,6 +126,11 @@ const ComparePage = () => {
                 </tbody>
               </table>
             </div>
+            <div className="bg-[#1a1a1a] rounded-lg p-5 items-start justify-center flex flex-col gap-10 w-[80%] ml-auto mr-auto mt-8">
+              <div className="w-full flex flex-col lg:h-[600px]">
+                  <CoinChart chartData={chartPriceData} multiAxis={true} name={coin1Data.name} name1={coin2Data.name}/>
+              </div>
+            </div>
             <Toaster/>
           </>
         }
@@ -126,4 +138,4 @@ const ComparePage = () => {
   )
 }
 
-export default ComparePage
+export default ComparePage;

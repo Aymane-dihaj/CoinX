@@ -41,7 +41,7 @@ interface coindata{
     }
 }
 
-const filterUniqueDates = (prices: Array<[number, number]>) => {
+export const filterUniqueDates = (prices: Array<[number, number]>) => {
     const seenDates = new Set();
     
     return prices.filter(([timestamp, price]) => {
@@ -169,7 +169,7 @@ const CoinPage = () => {
                                 {/* <ToggleComponents/> */}
                             </div>
                             <div className="w-full flex flex-col lg:h-[600px]">
-                                <CoinChart chartData={coinChart} priceType={type} multiAxis={false}/>
+                                <CoinChart chartData={coinChart} multiAxis={false}/>
                             </div>
                         </div>
                     </div>

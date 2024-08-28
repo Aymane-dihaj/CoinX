@@ -18,8 +18,7 @@ export const getCoinPrices = (id: string | undefined, days: number, type: string
             })
             return myData;
         } catch (err) {
-            const errorMessage = err instanceof Error ? err.message : 'An unknown error occurred';
-            notify(errorMessage); // Ensure notify can handle the error message type
+            notify('Cannot Fetch Coins Data'); // Ensure notify can handle the error message type
     }
 
 }
