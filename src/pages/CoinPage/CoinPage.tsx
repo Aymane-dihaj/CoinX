@@ -63,6 +63,7 @@ const CoinPage = () => {
     const [coinChart, setCoinChart] = useState({})
     const [days, setDays] = useState<number>(7);
     const [type, setType] = useState<string>('prices')
+
     const [coinData, setCoinData] = useState<coindata>({
         id: 0,
         name: '',
@@ -161,9 +162,6 @@ const CoinPage = () => {
                         </tbody>
                     </table>
                     <div className="space-y-3 mt-6 lg:mt-10 w-[80%] ml-auto mr-auto">
-                        {/* <div className=" px-10 flex p-8 gap-8 justify-center ml-auto mr-auto w-[80%]   rounded-lg">
-                            <BasicSelect/>
-                        </div> */}
                         <div className="bg-[#1a1a1a] rounded-lg p-5 items-start justify-center flex flex-col gap-10 w-full">
                             <div className="flex items-center gap-5">
                                 <SelectDays handleChange={handleDaysChange}/>

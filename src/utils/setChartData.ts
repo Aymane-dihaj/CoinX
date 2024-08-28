@@ -1,11 +1,11 @@
 import { convertDate } from "./convertDate"
 
-export const setChartData = (setCoinChart: any, prices: any, name: string, color: string) => {
+export const setChartData = (setCoinChart: any, prices: Array<[number, number]> , name: string, color: string
+  ) => {
 
   const Red = 'rgba(255, 0, 0, 0.04)'
   const Green = 'rgba(0, 255, 0, 0.04)'
 
-  console.log(name)
     setCoinChart({
         labels: prices.map((price: Array<number>) => convertDate(price[0])),
         datasets: [
