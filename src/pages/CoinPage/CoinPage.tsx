@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Navbar from "../Navbar";
-import Loader from "../ui/Loader";
+import Navbar from "../../components/Navbar";
+import Loader from "../../components/ui/Loader";
 import { CoinDataSetter } from "../../utils/CoinDataSetter";
-import List from "../List";
+import List from "../../components/List";
 import CoinInfo from "./CoinInfo";
 import { getCoinData } from "../../utils/getCoinData";
 import { getCoinPrices } from "../../utils/getCoinPrices";
 import CoinChart from "./CoinChart";
 import { convertDate } from "../../utils/convertDate";
-import SelectDays from "../ui/SelectButton";
+import SelectDays from "../../components/ui/SelectButton";
 import { setChartData } from "../../utils/setChartData";
 import { Toaster } from "react-hot-toast";
-import { notify } from "../ui/toast";
-import ToggleButtons from "../ui/toggleBar";
-import ToggleComponents from "../ui/toggleBar";
-import { SelectType } from "../ui/SelectType";
+import { notify } from "../../components/ui/toast";
+import ToggleButtons from "../../components/ui/toggleBar";
+import ToggleComponents from "../../components/ui/toggleBar";
+import { SelectType } from "../../components/ui/SelectType";
 
 interface coindata{
     id: number,
@@ -95,44 +95,59 @@ const CoinPage = () => {
     }, [id])
     
     const getData = async () => {
-        const data = await getCoinData(id);
-        if (data){
-            console.log(data);
-            const priceChange24h = parseFloat(data.market_data.price_change_percentage_24h);
-            CoinDataSetter(setCoinData, data);
-            let coinPrices = await getCoinPrices(id, days, type);
-            if (coinPrices && coinPrices.length > 0){
-                coinPrices = filterUniqueDates(coinPrices);
-                setChartData(setCoinChart, coinPrices, data.name, (priceChange24h > 0 ? 'green' : 'red'));
-                setLoading(false);
-                // console.log(coinPrices);
+        try {
+            const data = await getCoinData(id);
+            if (data) {
+                console.log(data);
+                const priceChange24h = parseFloat(data.market_data.price_change_percentage_24h);
+                CoinDataSetter(setCoinData, data);
+                let coinPrices = await getCoinPrices(id, days, type);
+                if (coinPrices && coinPrices.length > 0) {
+                    coinPrices = filterUniqueDates(coinPrices);
+                    setChartData(setCoinChart, coinPrices, data.name, priceChange24h > 0 ? 'green' : 'red');
+                    setLoading(false);
+                }
             }
+        } catch (error) {
+            console.error("Failed to fetch coin data:", error);
+            notify("Failed to fetch coin data. Please try again later.");
         }
-    }
-
+    };
+    
     const handleDaysChange = async (n: number) => {
-        setDays(n);
-        let prices = await getCoinPrices(id, n, type);
-        if (prices && prices.length > 0){
-            prices = filterUniqueDates(prices);
-            const priceChange24h = parseFloat(coinData.price_change_percentage_24h);
-            setChartData(setCoinChart, prices, coinData.name, (priceChange24h < 0 ? 'red' : 'green'));
+        try {
+            setDays(n);
+            let prices = await getCoinPrices(id, n, type);
+            if (prices && prices.length > 0) {
+                prices = filterUniqueDates(prices);
+                const priceChange24h = parseFloat(coinData.price_change_percentage_24h);
+                setChartData(setCoinChart, prices, coinData.name, priceChange24h < 0 ? 'red' : 'green');
+                setLoading(false);
+            }
+        } catch (error) {
+            console.error("Failed to fetch coin prices:", error);
+            notify("Failed to fetch coin Data. Please try again later.");
             setLoading(false);
-            // console.log(coinPrices);
         }
-    }
-
+    };
+    
     const handleTypeChange = async (priceType: string) => {
-        setType(priceType)
-        let newData = await getCoinPrices(id, days, priceType);
-        if (newData && newData.length > 0){
-            console.log(newData)
-            newData = filterUniqueDates(newData);
-            const priceChange24h = parseFloat(coinData.price_change_percentage_24h);
-            setChartData(setCoinChart, newData, coinData.name, (priceChange24h < 0 ? 'red' : 'green'));
-            setLoading(false)
+        try {
+            setType(priceType);
+            let newData = await getCoinPrices(id, days, priceType);
+            if (newData && newData.length > 0) {
+                newData = filterUniqueDates(newData);
+                const priceChange24h = parseFloat(coinData.price_change_percentage_24h);
+                setChartData(setCoinChart, newData, coinData.name, priceChange24h < 0 ? 'red' : 'green');
+                setLoading(false);
+            }
+        } catch (error) {
+            console.error("Failed to change price type:", error);
+            notify("Failed to change price type. Please try again later.");
+            setLoading(false);
         }
-    }
+    };
+    
 
     return (
         <>
@@ -156,12 +171,12 @@ const CoinPage = () => {
                                 {/* <ToggleComponents/> */}
                             </div>
                             <div className="w-full flex flex-col lg:h-[600px]">
-                                <CoinChart chartData={coinChart} multiAxis={false}/>
+                                <CoinChart chartData={coinChart} priceType={type} multiAxis={false}/>
                             </div>
                         </div>
                     </div>
                     <div>
-                        {coinData && <CoinInfo title={coinData.name} description={coinData.desc}/>}
+                        {coinData && <CoinInfo title={coinData.name} description={coinData.desc || 'There\'s No Description'}/>}
                     </div>
                     <Toaster/>
                 </div>

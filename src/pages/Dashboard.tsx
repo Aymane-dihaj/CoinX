@@ -6,6 +6,7 @@ import PaginationControlled from '../components/ui/pagination'
 import Loader from '../components/ui/Loader'
 import { notify } from '../components/ui/toast'
 import { Toaster } from 'react-hot-toast'
+import { getAllCoins } from '../utils/getAllCoins'
 
 
 const NoResult = ({searchValue, setSearchValue} : {searchValue: string, setSearchValue: any}) => {
@@ -37,27 +38,19 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    const options = {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-        'x-cg-demo-api-key': 'CG-8ztwbCfJuNWJzMUDSQA8FJC9',
-      },
-    };
-
-    try {
-      fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc', options)
-        .then(response => response.json())
-        .then((response) => {
-            setCoins(response);
-            setPaginationCoins(response.slice(0, 10));
-            setLoading(false);
-          })
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'An unknown error occurred';
-      notify(errorMessage); // Ensure notify can handle the error message type
-    }
+    getCoinsFromApi();
   }, []);
+  
+  const getCoinsFromApi = async () => {
+    const response = await getAllCoins();
+    if (response)
+    {
+      setCoins(response);
+      setPaginationCoins(response.slice(0, 10));
+      setLoading(false);
+    }
+  };
+
 
   // Filter coins based on search input
   let Filtredcoins = coins.filter(

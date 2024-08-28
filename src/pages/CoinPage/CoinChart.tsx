@@ -10,6 +10,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { convertPrice } from "../../utils/convertPrice";
 
 // Register the Filler plugin
 Chart.register(Filler);
@@ -24,7 +25,7 @@ ChartJS.register(
   Legend
 );
 
-function CoinChart({ chartData, multiAxis }: { chartData: any; multiAxis: boolean }) {
+function CoinChart({ chartData, multiAxis, priceType }: { chartData: any; multiAxis: boolean; priceType: string }) {
   const options = {
     plugins: {
       legend: {
@@ -38,6 +39,19 @@ function CoinChart({ chartData, multiAxis }: { chartData: any; multiAxis: boolea
       mode: "index",
       intersect: false,
     },
+    scales: {
+      y: {
+        ticks: {
+          callback: function (value: number){
+            if (priceType === 'prices')
+              return "$" + value.toLocaleString();
+            else{
+              return convertPrice(value)
+            }
+          }
+        }
+      }
+    }
   };
 
   return <Line data={chartData} options={options} />;
