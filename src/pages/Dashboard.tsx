@@ -11,10 +11,17 @@ import { getAllCoins } from '../utils/getAllCoins'
 
 const NoResult = ({searchValue, setSearchValue} : {searchValue: string, setSearchValue: any}) => {
   return (
-    <div className='border  min-h-[300px] flex flex-col gap-4 items-center justify-center'>
-      <h1 className='flex-wrap capitalize text-3xl font-medium'>cant't find &apos;{searchValue}&apos;</h1>
-      <button className='bg-themeColor p-2 rounded-lg text-black px-3 text-sm font-medium' onClick={() => {setSearchValue('')}}>Clear Search</button>
-    </div>
+      <div className='min-h-[300px] flex flex-col gap-4 items-center justify-center p-16 border ml-auto mr-atuo text-center'>
+        <h1 className='md:text-3xl text-lg font-medium break-words max-w-[80%]'>
+          can't find &apos;{searchValue}&apos;
+        </h1>
+        <button
+          className='bg-themeColor p-2 rounded-lg text-black px-3 text-sm font-medium'
+          onClick={() => setSearchValue('')}
+        >
+          Clear Search
+        </button>
+      </div>
   )
 }
 

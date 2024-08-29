@@ -12,9 +12,9 @@ export const SelectType: React.FC<SelectButtonProps> = ({ handleChange }) => {
           className="text-xs bg-gray-50 border border-gray-300 text-gray-900 md:text-sm rounded-lg block w-full p-1.5 md:p-2.5 dark:bg-white/[0.2] dark:border-white/[0.1] dark:placeholder-gray-400 dark:text-white"
           onChange={(e) => handleChange(e.target.value)}
         >
-          <option style={{ backgroundColor: '#1a1a1a' }} value="prices">Price</option>
-          <option style={{ backgroundColor: '#1a1a1a' }} value="market_caps">Market Cap</option>
-          <option style={{ backgroundColor: '#1a1a1a' }} value="total_volumes">Total Volume</option>
+          <option style={{ backgroundColor: '#111111' }} value="prices">Price</option>
+          <option style={{ backgroundColor: '#111111' }} value="market_caps">Market Cap</option>
+          <option style={{ backgroundColor: '#111111' }} value="total_volumes">Total Volume</option>
         </select>
       </form>
     </div>

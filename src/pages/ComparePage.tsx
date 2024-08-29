@@ -138,17 +138,17 @@ const ComparePage = () => {
               <span className='text-orange-500 mx-[5px]'>{coin1Data.name}</span>{' '}and{' '}
               <span className='text-blue-500 mx-[5px]'>{coin2Data.name}</span></h1>
               <table className="w-full flex items-center justify-center mt-2">
-                <tbody className=" rounded-lg w-[80%] flex items-center justify-center  bg-[#1a1a1a]">
+                <tbody className=" rounded-lg w-[80%] flex items-center justify-center  bg-[#111111]">
                     <List coin={coin1Data} onClick={() => handleRowClick('1')}/>
                 </tbody>
               </table>
               <table className="w-full flex items-center justify-center  ">
-                <tbody className=" rounded-lg w-[80%] flex items-center justify-center  bg-[#1a1a1a]">
+                <tbody className=" rounded-lg w-[80%] flex items-center justify-center  bg-[#111111]">
                     <List coin={coin2Data} onClick={() => handleRowClick('2')}/>
                 </tbody>
               </table>
             </div>
-            <div className="bg-[#1a1a1a] rounded-lg p-5 items-start justify-center flex flex-col gap-10 w-[80%] ml-auto mr-auto mt-8">
+            <div className="bg-[#111111] rounded-lg p-5 items-start justify-center flex flex-col gap-10 w-[80%] ml-auto mr-auto mt-8">
             <div className='flex w-full mr-auto ml-auto justify-between items-center'>
                 <div className='max-w-sm md:flex md:gap-3'>
                   <SelectDays handleChange={handleDaysChange}/>

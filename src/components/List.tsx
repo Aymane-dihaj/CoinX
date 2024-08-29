@@ -4,9 +4,11 @@ import TrendingDownRoundedIcon from '@mui/icons-material/TrendingDownRounded';
 import TrendingUpRoundedIcon from '@mui/icons-material/TrendingUpRounded';
 import { Tooltip } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
 
 
-const List = ({coin} : any) => {
+const List = ({coin, delay} : {coin: any, delay: number
+}) => {
 
   const navigate = useNavigate();
 
@@ -16,6 +18,14 @@ const List = ({coin} : any) => {
 
   return (
     // <Link to={`/coin/${coin.id}`} className='w-full'>
+    <motion.div
+      layout
+      initial={{ opacity: 0, x: -50 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.5, delay: delay }}
+      className='w-full'
+    >
+      
       <tr onClick={handleRowClick} className=' flex items-center justify-between w-full  p-5 cursor-pointer  hover:bg-white/[0.1]  hover:rounded-xl transition-all ease-in-out'>
           <Tooltip title='Name'>
             <td className=' w-[33%] md:w-[20%]  text-left  flex items-center'>
@@ -49,6 +59,7 @@ const List = ({coin} : any) => {
           </Tooltip>
           {/* </td> */}
       </tr>
+      </motion.div>
   )
 }
 

@@ -54,7 +54,7 @@ const SelectCoins = ({coin1, coin2, handleCoinChange} : {coin1: string, coin2: s
                 onChange={(e) => handleCoinChange(e, false)}
                 >
                     {allCoins.filter((item => item.id != coin2)).map((coin ) => (
-                        <option key={coin.id} style={{ backgroundColor: '#1a1a1a' }} value={coin.id}>{coin.name}</option>
+                        <option key={coin.id} style={{ backgroundColor: '#111111' }} value={coin.id}>{coin.name}</option>
                     ))}
                 </select>
             </form>
@@ -69,7 +69,7 @@ const SelectCoins = ({coin1, coin2, handleCoinChange} : {coin1: string, coin2: s
                 onChange={(e) => handleCoinChange(e, true)}
                 >
                       {allCoins.filter((item => item.id != coin1)).map((coin) => (
-                        <option key={coin.id} style={{ backgroundColor: '#1a1a1a' }} value={coin.id}>{coin.name}</option>
+                        <option key={coin.id} style={{ backgroundColor: '#111111' }} value={coin.id}>{coin.name}</option>
                     ))}
                 </select>
             </form>

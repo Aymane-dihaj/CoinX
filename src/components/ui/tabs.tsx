@@ -6,6 +6,7 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import Coin from '../Coin';
 import List from '../List';
+import { AnimatePresence } from 'framer-motion';
 
 interface Coin {
   id: string;
@@ -61,15 +62,17 @@ export default function LabTabs({ coins }: LabTabsProps) {
 
       <TabPanel value="grid" style={{ color: 'white'}}>
         <div className='flex justify-center gap-[1.5rem] mt-6 m-[.5rem] flex-wrap p-2 items-center'>
-          {coins.map((coin, idx) => (
-            <Coin coin={coin} key={idx}/>
+          <AnimatePresence>
+            {coins.map((coin, idx) => (
+              <Coin coin={coin} key={idx} delay={(idx % 4) * 0.1}/>
             ))}  
+          </AnimatePresence>
         </div>
       </TabPanel>
       <TabPanel value="list" style={{ color: 'white' }}>
-        <table className='w-[100%] mt-16 lg:w-[90%] lg:p-4 bg-white/[0.1] rounded-lg ml-auto mr-auto block '>
+        <table className='w-[100%] mt-16 lg:w-[90%] lg:p-4 bg-[#111111] rounded-lg ml-auto mr-auto block '>
           {coins.map((coin, idx) => (
-            <List coin={coin} key={idx}/>
+            <List coin={coin} key={idx} delay={(idx % 8) * 0.1}/>
           ))}  
         </table>
       </TabPanel>
