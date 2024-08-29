@@ -6,6 +6,6 @@ export const convertPrice = (price: number): string => {
     } else if (price >= 1_000) {
         return (price / 1_000).toFixed(1) + 'K';
     } else {
-        return price.toString();
+        return price.toFixed(2).toString();
     }
 };

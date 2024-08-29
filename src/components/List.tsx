@@ -3,13 +3,20 @@ import StarBorderRoundedIcon from '@mui/icons-material/StarBorderRounded';
 import TrendingDownRoundedIcon from '@mui/icons-material/TrendingDownRounded';
 import TrendingUpRoundedIcon from '@mui/icons-material/TrendingUpRounded';
 import { Tooltip } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const List = ({coin} : any) => {
+
+  const navigate = useNavigate();
+
+  const handleRowClick = () => {
+    navigate(`/coin/${coin.id}`);
+  };
+
   return (
-    <Link to={`/coin/${coin.id}`} className='w-full'>
-      <tr className=' flex items-center justify-between w-full  p-5  hover:bg-white/[0.1]  hover:rounded-xl transition-all ease-in-out'>
+    // <Link to={`/coin/${coin.id}`} className='w-full'>
+      <tr onClick={handleRowClick} className=' flex items-center justify-between w-full  p-5 cursor-pointer  hover:bg-white/[0.1]  hover:rounded-xl transition-all ease-in-out'>
           <Tooltip title='Name'>
             <td className=' w-[33%] md:w-[20%]  text-left  flex items-center'>
                 <div className='flex lg:gap-6 md:gap-4 gap-3 items-center '>
@@ -42,7 +49,6 @@ const List = ({coin} : any) => {
           </Tooltip>
           {/* </td> */}
       </tr>
-    </Link>
   )
 }
 

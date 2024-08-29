@@ -1,6 +1,6 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
-import { Chart, Filler } from 'chart.js';
+import { Chart, Filler, Ticks } from 'chart.js';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -25,13 +25,12 @@ ChartJS.register(
   Legend
 );
 
-function CoinChart({ chartData, multiAxis, name, name2}: { chartData: any; multiAxis: boolean; name?: string, name1?: string}) {
+function CoinChart({ chartData, multiAxis, priceType, name, name1 }: { chartData: any; multiAxis: boolean, priceType: string, name?: string, name1?: string }) {
   const options = {
     plugins: {
       legend: {
-        display: multiAxis ? true : false,
+        display: multiAxis,
       },
-      
     },
     responsive: true,
     maintainAspectRatio: false,
@@ -42,9 +41,35 @@ function CoinChart({ chartData, multiAxis, name, name2}: { chartData: any; multi
     scales: {
       coin1: {
         position: "left",
+        title: {
+          display: true,
+          text: name, // Title for the first y-axis
+          color: 'orange', // Title color
+          font: {
+            size: 11, // Title font size
+          }
+        },
+        ticks:{
+          callback: function(value: number) {
+            if (priceType === 'prices')
+                return '$' + value.toLocaleString()
+            else{
+              return '$' + convertPrice(value);
+            }
+          }
+        }
       },
       coin2: multiAxis && {
         position: "right",
+        ticks:{
+          callback: function(value: number) {
+            if (priceType === 'prices')
+                return '$' + value.toLocaleString()
+            else{
+              return '$' + convertPrice(value);
+            }
+          }
+        }
       },
     },
   };

@@ -155,8 +155,9 @@ const CoinPage = () => {
             <Navbar/>
             {
                 loading ? <Loader/> :
-                <div className="flex flex-col  gap-4 mb-10 pt-16">
-                    <table className="w-full flex items-center mt-16 md:mt-28 justify-center  ">
+                <div className="flex flex-col  gap-4 mb-10 pt-16 mt-28">
+                    <h1 className="w-[80%] ml-auto mr-auto flex gap-1 text-xl md:text-3xl mb-4 font-medium">&#x2022;<span className="text-orange-500 mx-1">{coinData.name}</span> Details and Price Analysis</h1>
+                    <table className="w-full flex items-center justify-center  ">
                         <tbody className=" rounded-lg w-[80%] flex items-center justify-center  bg-[#1a1a1a]">
                             <List coin={coinData}/>
                         </tbody>
@@ -173,7 +174,7 @@ const CoinPage = () => {
                             </div>
                         </div>
                     </div>
-                    <div>
+                    <div className="w-[80%] ml-auto mr-auto">
                         {coinData && <CoinInfo title={coinData.name} description={coinData.desc || 'There\'s No Description'}/>}
                     </div>
                     <Toaster/>

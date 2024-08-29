@@ -20,8 +20,7 @@ export const getCoinData = (id: string | undefined) => {
             return myData;
         
     } catch (err) {
-        const errorMessage = err instanceof Error ? err.message : 'An unknown error occurred';
-        notify(errorMessage); // Ensure notify can handle the error message type
+        notify('Cannot Fetch Coins Data'); // Ensure notify can handle the error message type
     }
         
 

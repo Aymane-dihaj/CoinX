@@ -43,14 +43,14 @@ const SelectCoins = ({coin1, coin2, handleCoinChange} : {coin1: string, coin2: s
     
     // console.log(coin1)
   return (
-    <div className='block md:flex gap-4 items-center'>
+    <div className='flex gap-4 items-center'>
         <div>
-            <form className="max-w-sm  mx-auto">
-                <label htmlFor="coin1" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">coin 1</label>
+            <form className="md:max-w-[200px] max-w-[100px]  mx-auto">
+                <label htmlFor="coin1" className="block mb-1 text-xs md:text-sm font-medium text-gray-900 dark:text-white">coin 1</label>
                 <select
                 id={coin1}
                 value={coin1}
-                className="drop-menu bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-white/[0.2] dark:border-white/[0.1] dark:placeholder-gray-400 dark:text-white"
+                className="text-xs bg-gray-50 border border-gray-300 text-gray-900 md:text-sm rounded-lg block w-full p-1.5 md:p-2.5 dark:bg-white/[0.2] dark:border-white/[0.1] dark:placeholder-gray-400 dark:text-white"
                 onChange={(e) => handleCoinChange(e, false)}
                 >
                     {allCoins.filter((item => item.id != coin2)).map((coin ) => (
@@ -60,12 +60,12 @@ const SelectCoins = ({coin1, coin2, handleCoinChange} : {coin1: string, coin2: s
             </form>
         </div>
         <div>
-            <form className="max-w-sm mx-auto">
-                <label htmlFor="coin2" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">coin 2</label>
+            <form className="md:max-w-[200px] max-w-[100px]  mx-auto">
+                <label htmlFor="coin2" className="block mb-1 text-xs md:text-sm font-medium text-gray-900 dark:text-white">coin 2</label>
                 <select
                 id={coin2}
                 value={coin2}
-                className="drop-menu bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-white/[0.2] dark:border-white/[0.1] dark:placeholder-gray-400 dark:text-white"
+                className="text-xs bg-gray-50 border border-gray-300 text-gray-900 md:text-sm rounded-lg block w-full p-1.5 md:p-2.5 dark:bg-white/[0.2] dark:border-white/[0.1] dark:placeholder-gray-400 dark:text-white"
                 onChange={(e) => handleCoinChange(e, true)}
                 >
                       {allCoins.filter((item => item.id != coin1)).map((coin) => (

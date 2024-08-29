@@ -5,11 +5,11 @@ interface SelectButtonProps {
 export const SelectType: React.FC<SelectButtonProps> = ({ handleChange }) => {
   return (
     <div>
-      <form className="max-w-sm mx-auto">
-        <label htmlFor="days" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type</label>
+      <form className="md:max-w-[200px] max-w-[100px]  mx-auto">
+        <label htmlFor="days" className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Type</label>
         <select
           id="days"
-          className="drop-menu bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-white/[0.2] dark:border-white/[0.1] dark:placeholder-gray-400 dark:text-white"
+          className="text-xs bg-gray-50 border border-gray-300 text-gray-900 md:text-sm rounded-lg block w-full p-1.5 md:p-2.5 dark:bg-white/[0.2] dark:border-white/[0.1] dark:placeholder-gray-400 dark:text-white"
           onChange={(e) => handleChange(e.target.value)}
         >
           <option style={{ backgroundColor: '#1a1a1a' }} value="prices">Price</option>

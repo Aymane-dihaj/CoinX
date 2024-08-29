@@ -45,6 +45,7 @@ const Dashboard = () => {
     const response = await getAllCoins();
     if (response)
     {
+      console.log('data fetched')
       setCoins(response);
       setPaginationCoins(response.slice(0, 10));
       setLoading(false);

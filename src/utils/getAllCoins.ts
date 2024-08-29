@@ -5,7 +5,7 @@ export const getAllCoins = () => {
         method: 'GET',
         headers: {
           accept: 'application/json',
-          'x-cg-demo-api-key': 'CG-8ztwbCfJuNWJzMUDSQA8FJC9',
+          'x-cg-demo-api-key': import.meta.env.VITE_API_KEY,
         },
       };
   
