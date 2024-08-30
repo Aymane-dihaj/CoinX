@@ -11,7 +11,7 @@ import { getAllCoins } from '../utils/getAllCoins'
 
 const NoResult = ({searchValue, setSearchValue} : {searchValue: string, setSearchValue: any}) => {
   return (
-      <div className='min-h-[300px] flex flex-col gap-4 items-center justify-center p-16 border ml-auto mr-atuo text-center'>
+      <div className='min-h-[300px] flex flex-col gap-4 items-center justify-center p-16 ml-auto mr-atuo text-center'>
         <h1 className='md:text-3xl text-lg font-medium break-words max-w-[80%]'>
           can't find &apos;{searchValue}&apos;
         </h1>
@@ -90,7 +90,7 @@ const Dashboard = () => {
               {!search && <PaginationControlled page={page} handlePageChange={handlePageChange} />}
             </div>
           )}
-          <Toaster/>
+          <Toaster position='top-right' />
         </div>
       }
     </>

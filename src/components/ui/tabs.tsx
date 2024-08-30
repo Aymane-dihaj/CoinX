@@ -64,16 +64,18 @@ export default function LabTabs({ coins }: LabTabsProps) {
         <div className='flex justify-center gap-[1.5rem] mt-6 m-[.5rem] flex-wrap p-2 items-center'>
           <AnimatePresence>
             {coins.map((coin, idx) => (
-              <Coin coin={coin} key={idx} delay={(idx % 4) * 0.1}/>
+              <Coin coin={coin} key={idx} delay={(idx % 5) * 0.1}/>
             ))}  
           </AnimatePresence>
         </div>
       </TabPanel>
       <TabPanel value="list" style={{ color: 'white' }}>
         <table className='w-[100%] mt-16 lg:w-[90%] lg:p-4 bg-[#111111] rounded-lg ml-auto mr-auto block '>
+        <AnimatePresence>
           {coins.map((coin, idx) => (
             <List coin={coin} key={idx} delay={(idx % 8) * 0.1}/>
           ))}  
+        </AnimatePresence>
         </table>
       </TabPanel>
     </TabContext>

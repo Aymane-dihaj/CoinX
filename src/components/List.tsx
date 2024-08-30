@@ -21,8 +21,8 @@ const List = ({coin, delay} : {coin: any, delay: number
     <motion.div
       layout
       initial={{ opacity: 0, x: -50 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.5, delay: delay }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.4, delay: delay }}
       className='w-full'
     >
       

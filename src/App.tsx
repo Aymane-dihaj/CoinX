@@ -4,6 +4,7 @@ import Dashboard from "./pages/Dashboard"
 import './index.css'
 import CoinPage from "./pages/CoinPage/CoinPage"
 import ComparePage from "./pages/ComparePage"
+import Saved from "./pages/Saved"
 
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard/>}/>
             <Route path="/coin/:id" element={<CoinPage/>}/>
             <Route path="/compare" element={<ComparePage/>}/>
-            {/* <Route path="/watchlist" element={<WatchListPage/>}/> */}
+            <Route path="/saved" element={<Saved/>}/>
           </Routes>
         </BrowserRouter>
     </div>
