@@ -26,7 +26,7 @@ const Coin = ({coin, delay} : {coin: any, delay: number}) => {
       layout
     >
       <Link to={`/coin/${coin.id}`}>
-        <div className={`w-[320px] h-[300px] bg-[#111111] rounded-xl px-6 py-8 hover:outline ${coin.price_change_percentage_24h > 0 ? 'hover:outline-green-500': 'hover:outline-red-500'} transition-all ease-in-out duration-300`} style={{ outlineWidth: '2px' }}>
+        <div className={`w-[320px] h-[300px] bg-softDark rounded-xl px-6 py-8 hover:outline ${coin.price_change_percentage_24h > 0 ? 'hover:outline-green-500': 'hover:outline-red-500'} transition-all ease-in-out duration-300`} style={{ outlineWidth: '2px' }}>
           <div className='flex justify-between items-center'>
             <div className='flex gap-2 items-center '>
               <img src={coin.image} className='object-cover w-[50px]' alt="coin image" />

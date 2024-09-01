@@ -3,8 +3,8 @@ import { convertDate } from "./convertDate"
 export const setChartData = (setCoinChart: any, prices1: Array<[number, number]> , name: string, color: string, prices2?: Array<[number, number]> , name2?: string
   ) => {
 
-  const Red = 'rgba(255, 0, 0, 0.06)'
-  const Green = 'rgba(0, 255, 0, 0.06)'
+  const Red = 'rgba(255, 0, 0, 0.04)'
+  const Green = 'rgba(0, 255, 0, 0.04)'
 
     if(prices2){
       setCoinChart({

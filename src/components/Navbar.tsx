@@ -13,6 +13,7 @@ const Navbar = () => {
               <div className='items-center hidden md:flex'>
                   <ul className='text-white flex items-center gap-10'>
                       <li className='cursor-pointer'><Link className='hover:text-gray-200' to="/">Home</Link></li>
+                      <li className='cursor-pointer'><Link className='hover:text-gray-200' to="/latest_news">News</Link></li>
                       <li className='cursor-pointer'><Link className='hover:text-gray-200' to="/compare">Compare</Link></li>
                       <li className='cursor-pointer'><Link className='hover:text-gray-200' to="/saved">Saved</Link></li>
                       <li className='cursor-pointer'><Link className='hover:text-gray-200' to="/dashboard"><DashboardBtn/></Link></li>

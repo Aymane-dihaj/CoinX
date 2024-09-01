@@ -70,7 +70,7 @@ export default function LabTabs({ coins }: LabTabsProps) {
         </div>
       </TabPanel>
       <TabPanel value="list" style={{ color: 'white' }}>
-        <table className='w-[100%] mt-16 lg:w-[90%] lg:p-4 bg-[#111111] rounded-lg ml-auto mr-auto block '>
+        <table className='w-[100%] mt-16 lg:w-[90%] lg:p-4 bg-softDark rounded-lg ml-auto mr-auto block '>
         <AnimatePresence>
           {coins.map((coin, idx) => (
             <List coin={coin} key={idx} delay={(idx % 8) * 0.1}/>

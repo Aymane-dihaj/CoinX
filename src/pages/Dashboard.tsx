@@ -78,7 +78,7 @@ const Dashboard = () => {
     <>
       <Navbar />
       {loading ? <Loader /> :
-        <div className='mt-16 pt-16'>
+        <div className='mt-16 pt-16 '>
           <div>
             <SearchBar search={search} onSearchChange={onSearchChange} />
           </div>
