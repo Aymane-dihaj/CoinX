@@ -5,11 +5,12 @@ import './index.css'
 import CoinPage from "./pages/CoinPage/CoinPage"
 import ComparePage from "./pages/ComparePage"
 import Saved from "./pages/Saved"
+import { Toaster } from "react-hot-toast"
 
 
 function App() {
   return (
-    <div className='font-sora bg-black text-white'>
+    <div className='font-sora bg-black text-white overflow-hidden'>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home/>}/>
@@ -19,6 +20,9 @@ function App() {
             <Route path="/saved" element={<Saved/>}/>
           </Routes>
         </BrowserRouter>
+        <div className="z-50">
+          <Toaster position="top-center"/>
+        </div>
     </div>
   )
 }

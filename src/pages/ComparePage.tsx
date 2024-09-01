@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import SelectCoins from '../components/ui/SelectCoins'
-import { notify } from '../components/ui/toast';
 import SelectDays from '../components/ui/SelectButton';
 import { getAllCoins } from '../utils/getAllCoins';
 import { getCoinData } from '../utils/getCoinData';
@@ -16,6 +15,7 @@ import CoinChart from './CoinPage/CoinChart';
 import SelectType from '../components/ui/SelectType';
 import CoinInfo from './CoinPage/CoinInfo';
 import { useNavigate } from 'react-router-dom';
+import Footer from '../components/Footer';
 
 const ComparePage = () => {
 
@@ -62,16 +62,17 @@ const ComparePage = () => {
       setAllCoins(coins);
       const data1 = await getCoinData(coin1);
       const data2 = await getCoinData(coin2);
-      CoinDataSetter(setCoin1Data, data1);
-      CoinDataSetter(setCoin2Data, data2);
       if (data1 && data2){
-        //Getting prices
+        CoinDataSetter(setCoin1Data, data1);
+        CoinDataSetter(setCoin2Data, data2);
         let prices1 = await getCoinPrices(coin1, days, priceType)
         let prices2 = await getCoinPrices(coin2, days, priceType);
-        prices1 = filterUniqueDates(prices1);
-        prices2 = filterUniqueDates(prices2);
-        setChartData(setChartPriceData, prices1, data1.name, 'green', prices2, data2.name);
-        setLoading(false); 
+        if (prices1 && prices2){
+          prices1 = filterUniqueDates(prices1);
+          prices2 = filterUniqueDates(prices2);
+          setChartData(setChartPriceData, prices1, data1.name, 'green', prices2, data2.name);
+          setLoading(false);
+        }
       }
     }
   }
@@ -82,29 +83,29 @@ const ComparePage = () => {
       const newCoin2 = e.target.value;
       setCoin2(newCoin2);
       const data2 = await getCoinData(newCoin2);
-      CoinDataSetter(setCoin2Data, data2);
+      if(data2)
+        CoinDataSetter(setCoin2Data, data2);
       //Fetching prices again
       let coin1Prices = await getCoinPrices(coin1, days, priceType);
       let coin2Prices = await getCoinPrices(newCoin2, days, priceType);
-      if (coin1Prices.length > 0 && coin2Prices.length > 0)
-      {
-        coin1Prices = filterUniqueDates(coin1Prices);
-        coin2Prices = filterUniqueDates(coin2Prices);
-        setChartData(setChartPriceData, coin1Prices, coin1Data.name, 'green', coin2Prices, data2.name);
+      if (coin1Prices && coin2Prices){
+        if (coin1Prices.length > 0 && coin2Prices.length > 0)
+        {
+          coin1Prices = filterUniqueDates(coin1Prices);
+          coin2Prices = filterUniqueDates(coin2Prices);
+          setChartData(setChartPriceData, coin1Prices, coin1Data.name, 'green', coin2Prices, data2.name);
+        }
       }
     }else {
       const newCoin1 = e.target.value;
       setCoin1(newCoin1);
-      // crypto1 is being changed
-      setCoin1Data(newCoin1);
-      // fetch coin1 data
       const data1 = await getCoinData(newCoin1);
-      CoinDataSetter(setCoin1Data, data1);
+      if (data1)
+        CoinDataSetter(setCoin1Data, data1);
       // fetch coin prices
       let coin1Prices = await getCoinPrices(newCoin1, days, priceType);
       let coin2Prices = await getCoinPrices(coin2, days, priceType);
-      if (coin1Prices.length > 0 && coin2Prices.length > 0)
-      {
+      if (coin1Prices && coin2Prices){
         coin1Prices = filterUniqueDates(coin1Prices);
         coin2Prices = filterUniqueDates(coin2Prices);
         setChartData(setChartPriceData, coin1Prices, data1.name, 'green', coin2Prices, coin2Data.name);
@@ -118,7 +119,7 @@ const ComparePage = () => {
     setPriceType(newPriceType);
     let coin1Prices = await getCoinPrices(coin1, days, newPriceType);
     let coin2Prices = await getCoinPrices(coin2, days, newPriceType);
-    if (coin1Prices.length > 0 && coin2Prices.length > 0)
+    if (coin1Prices && coin2Prices)
     {
       coin1Prices = filterUniqueDates(coin1Prices);
       coin2Prices = filterUniqueDates(coin2Prices);
@@ -164,7 +165,7 @@ const ComparePage = () => {
                 {coin1Data && <CoinInfo title={coin1Data.name} description={coin1Data.desc || 'There\'s No Description'}/>}
                 {coin2Data && <CoinInfo title={coin2Data.name} description={coin2Data.desc || 'There\'s No Description'}/>}
             </div>
-            <Toaster/>
+            <Footer/>
           </>
         }
     </div>

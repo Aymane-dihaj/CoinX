@@ -12,10 +12,10 @@ import { convertDate } from "../../utils/convertDate";
 import SelectDays from "../../components/ui/SelectButton";
 import { setChartData } from "../../utils/setChartData";
 import { Toaster } from "react-hot-toast";
-import { notify } from "../../components/ui/toast";
 import ToggleButtons from "../../components/ui/toggleBar";
 import ToggleComponents from "../../components/ui/toggleBar";
 import { SelectType } from "../../components/ui/SelectType";
+import Footer from "../../components/Footer";
 
 interface coindata{
     id: number,
@@ -111,7 +111,7 @@ const CoinPage = () => {
             }
         } catch (error) {
             console.error("Failed to fetch coin data:", error);
-            notify("Failed to fetch coin data. Please try again later.");
+            toast.error("Failed to fetch coin data. Please try again later.");
         }
     };
     
@@ -127,7 +127,7 @@ const CoinPage = () => {
             }
         } catch (error) {
             console.error("Failed to fetch coin prices:", error);
-            notify("Failed to fetch coin Data. Please try again later.");
+            toast.error("Failed to fetch coin Data. Please try again later.");
             setLoading(false);
         }
     };
@@ -144,7 +144,7 @@ const CoinPage = () => {
             }
         } catch (error) {
             console.error("Failed to change price type:", error);
-            notify("Failed to change price type. Please try again later.");
+            toast.error("Failed to change price type. Please try again later.");
             setLoading(false);
         }
     };
@@ -155,7 +155,7 @@ const CoinPage = () => {
             <Navbar/>
             {
                 loading ? <Loader/> :
-                <div className="flex flex-col  gap-4 mb-10 pt-16 mt-28">
+                <div className="flex flex-col  gap-4  pt-16 mt-28">
                     <h1 className="w-[80%] ml-auto mr-auto flex gap-1 text-xl md:text-3xl mb-4 font-medium">&#x2022;<span className="text-orange-500 mx-1">{coinData.name}</span> Details and Price Analysis</h1>
                     <table className="w-full flex items-center justify-center  ">
                         <tbody className="rounded-lg w-[80%] flex items-center justify-center  bg-[#111111]">
@@ -177,7 +177,7 @@ const CoinPage = () => {
                     <div className="w-[80%] ml-auto mr-auto">
                         {coinData && <CoinInfo title={coinData.name} description={coinData.desc || 'There\'s No Description'}/>}
                     </div>
-                    <Toaster/>
+                    <Footer/>
                 </div>
             }
         </>

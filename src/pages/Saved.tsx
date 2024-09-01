@@ -4,6 +4,7 @@ import LabTabs from '../components/ui/tabs';
 import { getAllCoins } from '../utils/getAllCoins';
 import toast from 'react-hot-toast';
 import Loader from '../components/ui/Loader';
+import Footer from '../components/Footer';
 
 export const addItemToSaveList = (e: React.MouseEvent, coinID: string) => {
     e.preventDefault();
@@ -62,10 +63,10 @@ const Saved = () => {
     };
 
     return (
-        <div className='flex flex-col gap-4 mb-10 pt-16 mt-28'>
-            <Navbar />
-            {loading ? <Loader /> : <LabTabs coins={coins} />}
-        </div>
+            <div className='flex flex-col gap-4 mb-10 pt-16 mt-28'>
+                <Navbar />
+                {loading ? <Loader /> : <LabTabs coins={coins} />}
+            </div>
     );
 };
 

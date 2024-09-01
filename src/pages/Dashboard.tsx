@@ -4,9 +4,9 @@ import LabTabs from '../components/ui/tabs'
 import SearchBar from '../components/SearchBar'
 import PaginationControlled from '../components/ui/pagination'
 import Loader from '../components/ui/Loader'
-import { notify } from '../components/ui/toast'
 import { Toaster } from 'react-hot-toast'
 import { getAllCoins } from '../utils/getAllCoins'
+import Footer from '../components/Footer'
 
 
 const NoResult = ({searchValue, setSearchValue} : {searchValue: string, setSearchValue: any}) => {
@@ -90,7 +90,7 @@ const Dashboard = () => {
               {!search && <PaginationControlled page={page} handlePageChange={handlePageChange} />}
             </div>
           )}
-          <Toaster position='top-right' />
+          <Footer/>
         </div>
       }
     </>

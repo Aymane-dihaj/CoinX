@@ -1,22 +1,20 @@
-import { notify } from "../components/ui/toast";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 export const getAllCoins = () => {
-    const options = {
-        method: 'GET',
-        headers: {
-          accept: 'application/json',
-          'x-cg-demo-api-key': import.meta.env.VITE_API_KEY,
-        },
-      };
   
-      try {
-        const AllCoins = fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc', options)
-          .then(response => response.json())
-          .then((response) => {
-            return response;
-            })
-            return AllCoins;
-      } catch (err) {
-        notify("Failed to Fetch the coins"); // Ensure notify can handle the error message type
-      }
-}
+  const API_KEY = import.meta.env.VITE_API_KEY;
+  const coins = axios
+    .get(
+      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc?x_cg_demo_api_key=${API_KEY}`)
+    .then((response) => {
+      // console.log("RESPONSE>>>", response.data);
+      return response.data;
+    })
+    .catch((error) => {
+      toast.error(error.message + ', Try again Later!');
+      console.log("ERROR  >>>", error.message); 
+    });
+
+  return coins;
+};

@@ -29,7 +29,7 @@ function CoinChart({ chartData, multiAxis, priceType, name, name1 }: { chartData
   const options = {
     plugins: {
       legend: {
-        display: multiAxis,
+        display: multiAxis ? true : false,
       },
     },
     responsive: true,
@@ -59,7 +59,8 @@ function CoinChart({ chartData, multiAxis, priceType, name, name1 }: { chartData
           }
         }
       },
-      coin2: multiAxis && {
+      ...(multiAxis && {
+        coin2: {
         position: "right",
         ticks:{
           callback: function(value: number) {
@@ -71,6 +72,7 @@ function CoinChart({ chartData, multiAxis, priceType, name, name1 }: { chartData
           }
         }
       },
+    })
     },
   };
 
