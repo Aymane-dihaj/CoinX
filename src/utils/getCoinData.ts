@@ -9,7 +9,6 @@ export const getCoinData = async (id: string | undefined) => {
             return response.data;
     })
     .catch((e) => {
-        console.log('errrror>>>>>>: ' + e.message);
         toast.error(e.message + ', Try again Later!')
     })
     return response;

@@ -8,7 +8,6 @@ import { useState } from "react";
 
 export default function ToggleComponents() {
     const [type, setType] = useState<string>('price');
-    console.log(type)
   return (
     <div
       style={{

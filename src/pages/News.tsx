@@ -20,7 +20,6 @@ const News = () => {
             setNews(data);
             setLoading(false);
         }
-        console.log('NEEEwWWS>>>', data);
     };
 
     return (

@@ -15,5 +15,4 @@ export const CoinDataSetter = (setCoinData: any, data: any) => {
         current_price: data.market_data.current_price.usd,
         market_cap: data.market_data.market_cap.usd,
       });
-    // console.log(data.description.en)
 }

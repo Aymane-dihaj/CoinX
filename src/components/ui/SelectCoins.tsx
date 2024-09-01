@@ -41,7 +41,6 @@ const SelectCoins = ({coin1, coin2, handleCoinChange} : {coin1: string, coin2: s
         }
     }
     
-    // console.log(coin1)
   return (
     <div className='flex gap-4 items-center'>
         <div>

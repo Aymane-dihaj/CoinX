@@ -35,7 +35,6 @@ const Dashboard = () => {
 
   const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
-    console.log(value);
     let previousIndex = (value - 1) * 10;
     setPaginationCoins(coins.slice(previousIndex, previousIndex + 10));
   };
@@ -52,7 +51,6 @@ const Dashboard = () => {
     const response = await getAllCoins();
     if (response)
     {
-      console.log('data fetched')
       setCoins(response);
       setPaginationCoins(response.slice(0, 10));
       setLoading(false);

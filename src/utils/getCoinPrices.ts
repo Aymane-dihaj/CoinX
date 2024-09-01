@@ -15,7 +15,6 @@ export const getCoinPrices = async (id: string | undefined, days: number, type: 
                 return response.data.prices;
         }
     }).catch((e) => {
-        console.log('prices error: ' + e.message);
         toast.error(e.message);
     })
     return prices;

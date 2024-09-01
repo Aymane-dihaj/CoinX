@@ -8,12 +8,9 @@ import CoinInfo from "./CoinInfo";
 import { getCoinData } from "../../utils/getCoinData";
 import { getCoinPrices } from "../../utils/getCoinPrices";
 import CoinChart from "./CoinChart";
-import { convertDate } from "../../utils/convertDate";
 import SelectDays from "../../components/ui/SelectButton";
 import { setChartData } from "../../utils/setChartData";
-import { Toaster } from "react-hot-toast";
-import ToggleButtons from "../../components/ui/toggleBar";
-import ToggleComponents from "../../components/ui/toggleBar";
+import toast from "react-hot-toast";
 import { SelectType } from "../../components/ui/SelectType";
 import Footer from "../../components/Footer";
 
@@ -99,7 +96,6 @@ const CoinPage = () => {
         try {
             const data = await getCoinData(id);
             if (data) {
-                console.log(data);
                 const priceChange24h = parseFloat(data.market_data.price_change_percentage_24h);
                 CoinDataSetter(setCoinData, data);
                 let coinPrices = await getCoinPrices(id, days, type);
@@ -110,7 +106,6 @@ const CoinPage = () => {
                 }
             }
         } catch (error) {
-            console.error("Failed to fetch coin data:", error);
             toast.error("Failed to fetch coin data. Please try again later.");
         }
     };
@@ -126,7 +121,6 @@ const CoinPage = () => {
                 setLoading(false);
             }
         } catch (error) {
-            console.error("Failed to fetch coin prices:", error);
             toast.error("Failed to fetch coin Data. Please try again later.");
             setLoading(false);
         }
@@ -143,7 +137,6 @@ const CoinPage = () => {
                 setLoading(false);
             }
         } catch (error) {
-            console.error("Failed to change price type:", error);
             toast.error("Failed to change price type. Please try again later.");
             setLoading(false);
         }
