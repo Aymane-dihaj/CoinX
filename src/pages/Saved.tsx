@@ -4,7 +4,6 @@ import LabTabs from '../components/ui/tabs';
 import { getAllCoins } from '../utils/getAllCoins';
 import toast from 'react-hot-toast';
 import Loader from '../components/ui/Loader';
-import Footer from '../components/Footer';
 
 export const addItemToSaveList = (e: React.MouseEvent, coinID: string) => {
     e.preventDefault();

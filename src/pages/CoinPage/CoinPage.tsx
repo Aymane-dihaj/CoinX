@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import Loader from "../../components/ui/Loader";
@@ -21,9 +21,7 @@ interface coindata{
     image: {
         large: string,
     },
-    desc: {
-        en: string,
-    },
+    desc: string,
     market_data: {
         price_change_percentage_24h: string;
         total_volume: {
@@ -35,13 +33,14 @@ interface coindata{
         market_cap: {
             usd: string,
         }
-    }
+    },
+    price_change_percentage_24h: string; // Add the missing property
 }
 
 export const filterUniqueDates = (prices: Array<[number, number]>) => {
     const seenDates = new Set();
     
-    return prices.filter(([timestamp, price]) => {
+    return prices.filter(([timestamp]) => {
       const date = new Date(timestamp).toLocaleDateString(); // Convert to date string
       
       if (seenDates.has(date)) {
@@ -68,9 +67,8 @@ const CoinPage = () => {
         image: {
             large: '',
         },
-        desc: {
-            en: '',
-        },
+        desc: '',
+        price_change_percentage_24h: '',
         market_data: {
             price_change_percentage_24h: '',
             total_volume: {
@@ -163,7 +161,7 @@ const CoinPage = () => {
                                 {/* <ToggleComponents/> */}
                             </div>
                             <div className="w-full flex flex-col lg:h-[600px]">
-                                <CoinChart chartData={coinChart} multiAxis={false}/>
+                                <CoinChart chartData={coinChart} multiAxis={false} priceType={type}/>
                             </div>
                         </div>
                     </div>

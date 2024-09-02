@@ -5,18 +5,12 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaRegStar, FaStar } from "react-icons/fa";
 import { addItemToSaveList, removeItemFromSaveList } from '../pages/Saved';
-import { Toaster } from 'react-hot-toast';
 
 const Coin = ({coin, delay} : {coin: any, delay: number}) => {
 
   let savedList = JSON.parse(localStorage.getItem('savedList'));
   const [add, setAdd] = useState(savedList?.includes(coin.id));
 
-  const handleSave = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevent the event from propagating to the Link
-    e.preventDefault();  // Prevent the default action, which is navigation
-    setAdd(!add);
-  }
 
   return (
     <motion.div

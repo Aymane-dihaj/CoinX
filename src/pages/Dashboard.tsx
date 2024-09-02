@@ -4,7 +4,6 @@ import LabTabs from '../components/ui/tabs'
 import SearchBar from '../components/SearchBar'
 import PaginationControlled from '../components/ui/pagination'
 import Loader from '../components/ui/Loader'
-import { Toaster } from 'react-hot-toast'
 import { getAllCoins } from '../utils/getAllCoins'
 import Footer from '../components/Footer'
 

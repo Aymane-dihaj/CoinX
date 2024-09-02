@@ -1,6 +1,5 @@
-import React from "react";
 import { Line } from "react-chartjs-2";
-import { Chart, Filler, Ticks } from 'chart.js';
+import { Chart, Filler } from 'chart.js';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -25,7 +24,7 @@ ChartJS.register(
   Legend
 );
 
-function CoinChart({ chartData, multiAxis, priceType, name, name1 }: { chartData: any; multiAxis: boolean, priceType: string, name?: string, name1?: string }) {
+function CoinChart({ chartData, multiAxis, priceType, name}: { chartData: any; multiAxis: boolean, priceType: string, name?: string}) {
   const options = {
     plugins: {
       legend: {

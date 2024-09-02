@@ -1,8 +1,6 @@
-interface SelectDaysProps {
-  handleChange: React.Dispatch<React.SetStateAction<number>>;
-}
 
-export const SelectDays: React.FC<SelectDaysProps> = ({ handleChange}) => {
+
+export const SelectDays = ({ handleChange} : {handleChange: any}) => {
   return (
     <div className="md:max-w-[200px] max-w-[100px]  mx-auto">
       <form className="">

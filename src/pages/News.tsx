@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import { getNews } from '../utils/getNews';
 import Loader from '../components/ui/Loader';
@@ -8,7 +8,7 @@ import ScrollToTopButton from '../components/ui/ScrollToTop';
 
 const News = () => {
     const [loading, setLoading] = useState(true);
-    const [news, setNews] = useState();
+    const [news, setNews] = useState([]);
 
     useEffect(() => {
         getData();
@@ -32,7 +32,7 @@ const News = () => {
                         <h1 className='text-3xl lg:text-5xl font-semibold w-full text-center '>Latest Crypto<span className='text-themeColor mx-2'>News</span></h1>
                         <div className='flex flex-wrap items-center justify-center gap-10'>
                             {
-                                news.map((paper: any, idx: number) => (
+                                news?.map((paper: any, idx: number) => (
                                     <Paper 
                                         key={paper.id}
                                         image={paper.imageurl}
@@ -41,7 +41,9 @@ const News = () => {
                                         body={paper.body}
                                         tags={paper.tags}
                                         publish_time={paper.published_on}
-                                        delay={(idx % 5) * 0.1}
+                                        delay={(idx % 4) * 0.2}
+                                        catego={paper.catego}
+                                        source={paper.source}
                                     />
                                 ))
                             }

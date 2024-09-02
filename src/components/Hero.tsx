@@ -1,4 +1,3 @@
-import React from 'react'
 import DashboardBtn from './ui/DashboardBtn'
 import {easeInOut, motion} from 'framer-motion'
 import { Link } from 'react-router-dom'

@@ -1,13 +1,11 @@
-import React from 'react'
-import StarBorderRoundedIcon from '@mui/icons-material/StarBorderRounded';
 import TrendingDownRoundedIcon from '@mui/icons-material/TrendingDownRounded';
 import TrendingUpRoundedIcon from '@mui/icons-material/TrendingUpRounded';
 import { Tooltip } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 
-const List = ({coin, delay} : {coin: any, delay: number
+const List = ({coin, delay} : {coin: any, delay?: number
 }) => {
 
   const navigate = useNavigate();

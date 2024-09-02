@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 const CoinInfo = ({title, description} : {title: string, description: string}) => {
 

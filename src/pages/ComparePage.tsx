@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import SelectCoins from '../components/ui/SelectCoins'
 import SelectDays from '../components/ui/SelectButton';
@@ -7,7 +7,6 @@ import { getCoinData } from '../utils/getCoinData';
 import { CoinDataSetter } from '../utils/CoinDataSetter';
 import { getCoinPrices } from '../utils/getCoinPrices';
 import Loader from '../components/ui/Loader';
-import { Toaster } from 'react-hot-toast';
 import List from '../components/List';
 import { setChartData } from '../utils/setChartData';
 import { filterUniqueDates } from './CoinPage/CoinPage';
@@ -21,8 +20,14 @@ const ComparePage = () => {
 
   const [coin1, setCoin1] = useState('bitcoin');
   const [coin2, setCoin2] = useState('ethereum');
-  const [coin1Data, setCoin1Data] = useState();
-  const [coin2Data, setCoin2Data] = useState();
+  interface CoinData {
+    name: string;
+    desc?: string;
+    // Add other properties if necessary
+  }
+  
+  const [coin1Data, setCoin1Data] = useState<CoinData>();
+  const [coin2Data, setCoin2Data] = useState<CoinData>();
   const [days, setDays] = useState<number>(7);
   const [loading, setLoading] = useState(true);
   const [priceType, setPriceType] = useState<string>('prices')
@@ -38,7 +43,8 @@ const ComparePage = () => {
     let prices2 = await getCoinPrices(coin2, newDays, priceType);
     prices1 = filterUniqueDates(prices1);
     prices2 = filterUniqueDates(prices2);
-    setChartData(setChartPriceData, prices1, coin1Data.name, 'green', prices2, coin2Data.name);
+    if (coin1Data && coin2Data)
+      setChartData(setChartPriceData, prices1, coin1Data.name, 'green', prices2, coin2Data.name);
     // setLoading(false);
   };
 
@@ -93,7 +99,9 @@ const ComparePage = () => {
         {
           coin1Prices = filterUniqueDates(coin1Prices);
           coin2Prices = filterUniqueDates(coin2Prices);
-          setChartData(setChartPriceData, coin1Prices, coin1Data.name, 'green', coin2Prices, data2.name);
+          if (coin1Data) {
+            setChartData(setChartPriceData, coin1Prices, coin1Data.name, 'green', coin2Prices, data2.name);
+          }
         }
       }
     }else {
@@ -108,7 +116,9 @@ const ComparePage = () => {
       if (coin1Prices && coin2Prices){
         coin1Prices = filterUniqueDates(coin1Prices);
         coin2Prices = filterUniqueDates(coin2Prices);
-        setChartData(setChartPriceData, coin1Prices, data1.name, 'green', coin2Prices, coin2Data.name);
+        if (coin2Data) {
+          setChartData(setChartPriceData, coin1Prices, data1.name, 'green', coin2Prices, coin2Data.name);
+        }
       }
     }
     setLoading(false)
@@ -123,7 +133,8 @@ const ComparePage = () => {
     {
       coin1Prices = filterUniqueDates(coin1Prices);
       coin2Prices = filterUniqueDates(coin2Prices);
-      setChartData(setChartPriceData, coin1Prices, coin1Data.name, 'green', coin2Prices, coin2Data.name);
+      if (coin1Data && coin2Data)
+        setChartData(setChartPriceData, coin1Prices, coin1Data.name, 'green', coin2Prices, coin2Data.name);
     }
   }
 
@@ -135,17 +146,17 @@ const ComparePage = () => {
          : <>
      
             <div className='flex flex-col mt-8 gap-4'>
-            <h1 className='w-[80%] ml-auto mr-auto font-medium md:text-3xl flex items-center'>&#x2022; Comparison Between{' '}
-              <span className='text-orange-500 mx-[5px]'>{coin1Data.name}</span>{' '}and{' '}
-              <span className='text-blue-500 mx-[5px]'>{coin2Data.name}</span></h1>
+            <h1 className='w-[80%] ml-auto mr-auto font-medium md:text-3xl text-[15px] flex items-center'>&#x2022; Comparison Between{' '}
+              <span className='text-orange-500 mx-1'>{coin1Data?.name}</span> and
+              <span className='text-blue-500 mx-[5px]'>{coin2Data?.name}</span></h1>
               <table className="w-full flex items-center justify-center mt-2">
-                <tbody className=" rounded-lg w-[80%] flex items-center justify-center  bg-softDark">
-                    <List coin={coin1Data} onClick={() => handleRowClick('1')}/>
+                <tbody className=" rounded-lg w-[80%] flex items-center justify-center  bg-softDark" onClick={() => handleRowClick('1')}>
+                    <List coin={coin1Data} />
                 </tbody>
               </table>
               <table className="w-full flex items-center justify-center  ">
-                <tbody className=" rounded-lg w-[80%] flex items-center justify-center  bg-softDark">
-                    <List coin={coin2Data} onClick={() => handleRowClick('2')}/>
+                <tbody className=" rounded-lg w-[80%] flex items-center justify-center  bg-softDark" onClick={() => handleRowClick('2')}>
+                    <List coin={coin2Data} />
                 </tbody>
               </table>
             </div>
@@ -158,7 +169,7 @@ const ComparePage = () => {
               <SelectCoins coin1={coin1} coin2={coin2} handleCoinChange={handleCoinChange}/>
               </div>
               <div className="w-full flex flex-col lg:h-[600px]">
-                  <CoinChart chartData={chartPriceData} multiAxis={true} name={coin1Data.name} name1={coin2Data.name}/>
+                  <CoinChart chartData={chartPriceData} multiAxis={true} priceType={priceType} name={coin1Data?.name}/>
               </div>
             </div>
             <div className='mt-8 w-[80%] mr-auto ml-auto '>
