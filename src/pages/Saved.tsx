@@ -7,7 +7,7 @@ import Loader from '../components/ui/Loader';
 
 export const addItemToSaveList = (e: React.MouseEvent, coinID: string) => {
     e.preventDefault();
-    let savedList = JSON.parse(localStorage.getItem('savedList') ?? '') || [];
+    const savedList = JSON.parse(localStorage.getItem("savedList") || '[]');
 
     if (!savedList.includes(coinID)) {
         savedList.push(coinID);
@@ -27,7 +27,7 @@ export const removeItemFromSaveList = (
     e.preventDefault();
     
     if (window.confirm("Are you sure you want to remove this coin?")) {
-        let savedList = JSON.parse(localStorage.getItem("savedList") ?? "") || [];
+        const savedList = JSON.parse(localStorage.getItem("savedList") || '[]');
         const newList = savedList.filter((coin: any) => coin !== coinID);
         setAdd(false);
         localStorage.setItem("savedList", JSON.stringify(newList));
@@ -40,7 +40,7 @@ export const removeItemFromSaveList = (
 };
 
 const Saved = () => {
-    const savedList = JSON.parse(localStorage.getItem("savedList") ?? '') || [];
+    const savedList = JSON.parse(localStorage.getItem("savedList") || '[]');
     const [coins, setCoins] = useState([]);
     const [loading, setLoading] = useState<boolean>(true);
 

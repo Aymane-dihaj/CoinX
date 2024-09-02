@@ -8,7 +8,7 @@ import { addItemToSaveList, removeItemFromSaveList } from '../pages/Saved';
 
 const Coin = ({coin, delay} : {coin: any, delay: number}) => {
 
-  let savedList = JSON.parse(localStorage.getItem('savedList') || '');
+  const savedList = JSON.parse(localStorage.getItem("savedList") || '[]');
   const [add, setAdd] = useState(savedList?.includes(coin.id));
 
 
