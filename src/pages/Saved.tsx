@@ -7,7 +7,7 @@ import Loader from '../components/ui/Loader';
 
 export const addItemToSaveList = (e: React.MouseEvent, coinID: string) => {
     e.preventDefault();
-    let savedList = JSON.parse(localStorage.getItem('savedList')) || [];
+    let savedList = JSON.parse(localStorage.getItem('savedList') ?? '') || [];
 
     if (!savedList.includes(coinID)) {
         savedList.push(coinID);
@@ -27,8 +27,8 @@ export const removeItemFromSaveList = (
     e.preventDefault();
     
     if (window.confirm("Are you sure you want to remove this coin?")) {
-        let savedList = JSON.parse(localStorage.getItem("savedList")) || [];
-        const newList = savedList.filter((coin) => coin !== coinID);
+        let savedList = JSON.parse(localStorage.getItem("savedList") ?? "") || [];
+        const newList = savedList.filter((coin: any) => coin !== coinID);
         setAdd(false);
         localStorage.setItem("savedList", JSON.stringify(newList));
         toast.success(`${coinID} - has been removed!`);
@@ -40,10 +40,9 @@ export const removeItemFromSaveList = (
 };
 
 const Saved = () => {
-    const savedList = JSON.parse(localStorage.getItem("savedList")) || [];
+    const savedList = JSON.parse(localStorage.getItem("savedList") ?? '') || [];
     const [coins, setCoins] = useState([]);
     const [loading, setLoading] = useState<boolean>(true);
-    const [savedCoins, setSavedCoins] = useState([]);
 
     useEffect(() => {
         if (savedList.length > 0) {
@@ -56,7 +55,7 @@ const Saved = () => {
     const getData = async () => {
         const response = await getAllCoins();
         if (response) {
-            setCoins(response.filter((coin) => savedList.includes(coin.id)));
+            setCoins(response.filter((coin: any) => savedList.includes(coin.id)));
             setLoading(false);
         }
     };

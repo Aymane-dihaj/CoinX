@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import TrendingDownRoundedIcon from '@mui/icons-material/TrendingDownRounded';
 import TrendingUpRoundedIcon from '@mui/icons-material/TrendingUpRounded';
 import { Link } from 'react-router-dom';
@@ -8,7 +8,7 @@ import { addItemToSaveList, removeItemFromSaveList } from '../pages/Saved';
 
 const Coin = ({coin, delay} : {coin: any, delay: number}) => {
 
-  let savedList = JSON.parse(localStorage.getItem('savedList'));
+  let savedList = JSON.parse(localStorage.getItem('savedList') || '');
   const [add, setAdd] = useState(savedList?.includes(coin.id));
 
 
