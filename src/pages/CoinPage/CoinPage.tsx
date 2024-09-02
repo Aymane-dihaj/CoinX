@@ -158,7 +158,6 @@ const CoinPage = () => {
                             <div className="flex items-center gap-5">
                                 <SelectDays handleChange={handleDaysChange}/>
                                 <SelectType handleChange={handleTypeChange}/>
-                                {/* <ToggleComponents/> */}
                             </div>
                             <div className="w-full flex flex-col lg:h-[600px]">
                                 <CoinChart chartData={coinChart} multiAxis={false} priceType={type}/>

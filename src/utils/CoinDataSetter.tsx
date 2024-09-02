@@ -1,4 +1,3 @@
-import React from 'react'
 
 
 export const CoinDataSetter = (setCoinData: any, data: any) => {

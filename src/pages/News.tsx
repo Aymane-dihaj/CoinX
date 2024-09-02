@@ -42,8 +42,6 @@ const News = () => {
                                         tags={paper.tags}
                                         publish_time={paper.published_on}
                                         delay={(idx % 4) * 0.2}
-                                        catego={paper.catego}
-                                        source={paper.source}
                                     />
                                 ))
                             }

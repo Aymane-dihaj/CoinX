@@ -32,7 +32,7 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [noResults, setNoResults] = useState(false); // New state for no results message
 
-  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+  const handlePageChange = (_event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
     let previousIndex = (value - 1) * 10;
     setPaginationCoins(coins.slice(previousIndex, previousIndex + 10));

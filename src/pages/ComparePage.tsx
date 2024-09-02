@@ -32,7 +32,6 @@ const ComparePage = () => {
   const [loading, setLoading] = useState(true);
   const [priceType, setPriceType] = useState<string>('prices')
   const [chartPriceData, setChartPriceData] = useState();
-  const [allCoins, setAllCoins] = useState([]);
 
 
   const handleDaysChange = async (e: number) => {
@@ -63,22 +62,18 @@ const ComparePage = () => {
   
   const getData = async () => {
     setLoading(true);
-    const coins = await getAllCoins();
-    if (coins){
-      setAllCoins(coins);
-      const data1 = await getCoinData(coin1);
-      const data2 = await getCoinData(coin2);
-      if (data1 && data2){
-        CoinDataSetter(setCoin1Data, data1);
-        CoinDataSetter(setCoin2Data, data2);
-        let prices1 = await getCoinPrices(coin1, days, priceType)
-        let prices2 = await getCoinPrices(coin2, days, priceType);
-        if (prices1 && prices2){
-          prices1 = filterUniqueDates(prices1);
-          prices2 = filterUniqueDates(prices2);
-          setChartData(setChartPriceData, prices1, data1.name, 'green', prices2, data2.name);
-          setLoading(false);
-        }
+    const data1 = await getCoinData(coin1);
+    const data2 = await getCoinData(coin2);
+    if (data1 && data2){
+      CoinDataSetter(setCoin1Data, data1);
+      CoinDataSetter(setCoin2Data, data2);
+      let prices1 = await getCoinPrices(coin1, days, priceType)
+      let prices2 = await getCoinPrices(coin2, days, priceType);
+      if (prices1 && prices2){
+        prices1 = filterUniqueDates(prices1);
+        prices2 = filterUniqueDates(prices2);
+        setChartData(setChartPriceData, prices1, data1.name, 'green', prices2, data2.name);
+        setLoading(false);
       }
     }
   }

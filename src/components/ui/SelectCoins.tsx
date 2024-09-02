@@ -1,34 +1,34 @@
 import React, { useEffect, useState } from 'react'
 import { getAllCoins } from '../../utils/getAllCoins';
 
-// interface coindata{
-//     id: number,
-//     name: string,
-//     symbol: string,
-//     image: {
-//         large: string,
-//     },
-//     desc: {
-//         en: string,
-//     },
-//     market_data: {
-//         price_change_percentage_24h: string;
-//         total_volume: {
-//             usd: string;
-//         }
-//         current_price: {
-//             usd: string,
-//         }
-//         market_cap: {
-//             usd: string,
-//         }
-//     }
-// }
+interface coindata{
+    id: string,
+    name: string,
+    symbol: string,
+    image: {
+        large: string,
+    },
+    desc: {
+        en: string,
+    },
+    market_data: {
+        price_change_percentage_24h: string;
+        total_volume: {
+            usd: string;
+        }
+        current_price: {
+            usd: string,
+        }
+        market_cap: {
+            usd: string,
+        }
+    }
+}
 
 
 const SelectCoins = ({coin1, coin2, handleCoinChange} : {coin1: string, coin2: string, handleCoinChange: React.SetStateAction<any>}) => {
     
-    const [allCoins, setAllCoins] = useState([]);
+    const [allCoins, setAllCoins] = useState<coindata[]>([]);
     
     useEffect(() => {
         getCoinsData();

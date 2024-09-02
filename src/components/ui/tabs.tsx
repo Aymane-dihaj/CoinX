@@ -22,7 +22,7 @@ interface LabTabsProps {
 export default function LabTabs({ coins }: LabTabsProps) {
   const [value, setValue] = useState('grid');
 
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+  const handleChange = (_event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
 

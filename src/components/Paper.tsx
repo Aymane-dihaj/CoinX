@@ -9,8 +9,6 @@ type PaperProps = {
     body: string;
     tags: string;
     publish_time: string;
-    catego: string;
-    source: string;
     delay: number;
   };
 
@@ -19,8 +17,6 @@ type PaperProps = {
     url,
     title,
     body,
-    catego,
-    source,
     tags,
     publish_time,
     delay,

@@ -8,6 +8,7 @@ import {
   PointElement,
   Tooltip,
   Legend,
+  ChartOptions,
 } from "chart.js";
 import { convertPrice } from "../../utils/convertPrice";
 
@@ -24,8 +25,8 @@ ChartJS.register(
   Legend
 );
 
-function CoinChart({ chartData, multiAxis, priceType, name}: { chartData: any; multiAxis: boolean, priceType: string, name?: string}) {
-  const options = {
+function CoinChart({ chartData, multiAxis, priceType, name }: { chartData: any; multiAxis: boolean; priceType: string; name?: string }) {
+  const options: ChartOptions<"line"> = {
     plugins: {
       legend: {
         display: multiAxis ? true : false,
@@ -46,32 +47,32 @@ function CoinChart({ chartData, multiAxis, priceType, name}: { chartData: any; m
           color: 'orange', // Title color
           font: {
             size: 11, // Title font size
-          }
+          },
         },
-        ticks:{
-          callback: function(value: number) {
+        ticks: {
+          callback: function (value: string | number) {
             if (priceType === 'prices')
-                return '$' + value.toLocaleString()
-            else{
-              return '$' + convertPrice(value);
+              return '$' + value.toLocaleString();
+            else {
+              return '$' + convertPrice(Number(value));
             }
-          }
-        }
+          },
+        },
       },
       ...(multiAxis && {
         coin2: {
-        position: "right",
-        ticks:{
-          callback: function(value: number) {
-            if (priceType === 'prices')
-                return '$' + value.toLocaleString()
-            else{
-              return '$' + convertPrice(value);
-            }
-          }
-        }
-      },
-    })
+          position: "right",
+          ticks: {
+            callback: function (value: string | number) {
+              if (priceType === 'prices')
+                return '$' + value.toLocaleString();
+              else {
+                return '$' + convertPrice(value as number);
+              }
+            },
+          },
+        },
+      }),
     },
   };
 
