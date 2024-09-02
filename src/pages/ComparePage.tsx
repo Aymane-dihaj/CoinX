@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import SelectCoins from '../components/ui/SelectCoins'
 import SelectDays from '../components/ui/SelectButton';
-import { getAllCoins } from '../utils/getAllCoins';
 import { getCoinData } from '../utils/getCoinData';
 import { CoinDataSetter } from '../utils/CoinDataSetter';
 import { getCoinPrices } from '../utils/getCoinPrices';
