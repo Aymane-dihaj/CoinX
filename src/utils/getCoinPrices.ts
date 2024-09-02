@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 
 
 export const getCoinPrices = async (id: string | undefined, days: number, type: string) => {
-    const API_KEY = import.meta.env.VITE_API_KEY;
+    const API_KEY = 'CG-s11MMzhxkicsqsodRw1ZaHtZ';
     const prices = axios.get(`https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${days}?x_cg_demo_api_key=${API_KEY}`)
     .then((response) => {
         if (response.data){

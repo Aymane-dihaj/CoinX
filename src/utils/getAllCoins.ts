@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 
 export const getAllCoins = () => {
   
-  const API_KEY = import.meta.env.VITE_API_KEY;
+  const API_KEY = 'CG-s11MMzhxkicsqsodRw1ZaHtZ';
   const coins = axios
     .get(
       `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc?x_cg_demo_api_key=${API_KEY}`)

@@ -3,7 +3,7 @@ import axios from 'axios'
 
 
 export const getCoinData = async (id: string | undefined) => {
-    const API_KEY = import.meta.env.VITE_API_KEY;
+    const API_KEY = 'CG-s11MMzhxkicsqsodRw1ZaHtZ';
     const response = axios.get(`https://api.coingecko.com/api/v3/coins/${id}?x_cg_demo_api_key=${API_KEY}`).then((response) => {
         if (response)
             return response.data;
