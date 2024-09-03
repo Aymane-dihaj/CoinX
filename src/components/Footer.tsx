@@ -9,7 +9,7 @@ const Footer = () => {
         <div className='flex items-center gap-5 '>
             <BsGithub size={20}/>
         </div>
-        <p className='text-sm tracking-wide font-medium flex'>© Developed With <FaHeart color='' className='mx-1'/>, By Aymane Dihaj.</p>
+        <p className='text-sm tracking-wide font-medium flex'>© Made With <FaHeart color='' className='mx-1'/>, By Aymane Dihaj.</p>
     </div>
   )
 }
